@@ -1,0 +1,29 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  justify-content: space-between;
+}
+.logo_img {
+  position: relative;
+  z-index: 999;
+  margin: 0 160px 0 0;
+}
+
+
+.menu_link > * > *{
+  line-height: 1;
+  padding: 0.25rem;
+  font-size: 19px;
+
+  &:hover {
+    color: #4db935;
+  }
+
+
+}
+@media (max-width: 870px) {
+  .menu_link {
+    display: none;
+  }
+}
