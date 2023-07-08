@@ -1,12 +1,15 @@
-.header {
+.header_menu {
   display: flex;
   align-items: center;
   padding: 10px 16px;
   justify-content: space-between;
+  z-index: 100;
+  position: relative;
+
 }
 .logo_img {
   position: relative;
-  z-index: 999;
+  z-index: 10001;
   margin: 0 160px 0 0;
 }
 

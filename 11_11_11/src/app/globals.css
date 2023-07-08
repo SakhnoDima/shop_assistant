@@ -4,8 +4,25 @@
   margin: 0;
 }
 
+*::selection {
+  background-color: black;
+  color: white;
+}
+
 body {
   font-family: 'IBM Plex Mono', monospace;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #4db935;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000000;
 }
 
 a {
@@ -16,4 +33,24 @@ a {
 .active_menu_link {
   /*color: darkgoldenrod;*/
   border: 1px solid black;
+}
+
+.fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  background-color: white;
+}
+
+.main {
+  padding: 88px 0 0 0;
+  margin: 0 0 70px 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 5;
+
 }
