@@ -4,16 +4,15 @@ import Link from "next/link";
 
 
 const HomeListBrands = ({brand}) => {
-
     return <div className={s.home_list_brand}>
-        <Image
-            src={brand.img}
-            alt={brand.title}
-            className={s.brand_img}
-
-        />
-
-
+            <Image
+                src={brand.img}
+                alt={brand.title}
+                className={s.brand_img}
+                height={996}
+                width={1282}
+                objectFit={'container'}
+            />
         <div className={s.brand_title}>
             {brand.title}
         </div>
