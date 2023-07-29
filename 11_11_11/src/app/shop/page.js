@@ -1,5 +1,5 @@
 "use client"
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useEffect} from "react";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import FilterIcon from "@/../public/filterIcon.png"
@@ -10,7 +10,7 @@ import s from "./shop.module.scss";
 
 const Shop = () => {
     const dispatch = useDispatch();
-    const {products, currentPage, isFetching, totalCount} = useSelector(state => state.products);
+    const {products, isFetching, totalCount} = useSelector(state => state.products);
 
     useEffect(() => {
         if (isFetching) {
@@ -34,7 +34,6 @@ const Shop = () => {
         }
     }, [scrollHandle])
 
-    // console.log(products)
     return <div className={s.shop_page}>
         <div className={s.sort_and_filter_btn}>
             <div className={s.filter_btn}>

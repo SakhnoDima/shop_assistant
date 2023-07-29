@@ -1,11 +1,10 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {useDispatch, useSelector} from "react-redux";
 
 export const getProducts = createAsyncThunk(
     'products/getProducts',
     async function (_, {dispatch, getState}) {
         const currentPage = getState().products.currentPage
-        const response = await fetch(`https://nothingtosay322.pythonanywhere.com/products?page=${currentPage}&size=10`)
+        const response = await fetch(`https://nothingtosay322.pythonanywhere.com/products?page=${currentPage}&size=4`)
         dispatch(setFetching(false));
         dispatch(setCurrentPage());
 
@@ -43,8 +42,9 @@ const productsSlice = createSlice({
         },
         [getProducts.fulfilled]: (state, action) => {
             state.status = 'resolved';
+            // console.log(action.payload)
             state.products = [...state.products, ...action.payload.products];
-            state.totalCount = 25
+            state.totalCount = action.payload.total;
         },
         [getProducts.rejected]: (state, action) => {
         },

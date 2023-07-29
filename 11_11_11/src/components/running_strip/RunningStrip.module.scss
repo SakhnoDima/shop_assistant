@@ -16,7 +16,7 @@
   }
 
   .running_strip {
-    animation: running_strip_container 10s linear infinite;
+    animation: running_strip 10s linear infinite;
     width: 100%;
   }
 
@@ -29,7 +29,7 @@
   }
 }
 
-@keyframes running_strip_container {
+@keyframes running_strip {
   0% {
     transform: translateX(100%);
   }

@@ -1,6 +1,5 @@
 .shop_page {
   border-bottom: 1px solid black;
-
 }
 
 .sort_and_filter_btn {
@@ -9,8 +8,8 @@
   padding: 20px;
   font-size: 23px;
   border-bottom: 1px solid black;
-
 }
+
 .sort_and_filter_btn > * {
   display: flex;
   align-items: center;
@@ -18,18 +17,11 @@
   cursor: pointer;
 }
 
-.filter_btn {
-
-}
-
-.sort_btn {
-
-}
-
 .products {
   display: flex;
   flex-wrap: wrap;
 }
+
 .products > * {
   flex: 0 1 25%;
 }
@@ -39,6 +31,7 @@
     flex: 0 1 33%;
   }
 }
+
 @media (max-width: 1420px) {
   .products > * {
     flex: 0 1 50%;

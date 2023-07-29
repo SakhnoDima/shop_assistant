@@ -1,10 +1,14 @@
-import { Waveform } from '@uiball/loaders'
+import {LineWobble} from '@uiball/loaders';
+import s from "./Loader.module.scss"
 
 export const Loader = () => {
-    return<Waveform
-        size={40}
-        lineWeight={3.5}
-        speed={1}
-        color="black"
-    />
+    return <div className={s.loader}>
+        <LineWobble
+            size={80}
+            lineWeight={2.5}
+            speed={0.8}
+            color="#4db935"
+        />
+    </div>
+
 }

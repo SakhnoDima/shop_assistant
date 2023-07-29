@@ -32,19 +32,25 @@ a {
 }
 
 .active_menu_link {
-  /*color: darkgoldenrod;*/
   border: 1px solid black;
 }
 
 .fixed {
   position: sticky;
+  top: 0;
   width: 100%;
   z-index: 1000;
   background-color: white;
 }
 
 .main {
-  margin: 0 0 70px 0;
+  margin: 0 0 32px 0;
+}
+@media (max-width: 520px) {
+  .main {
+    margin: 0 0 48px 0;
+
+  }
 }
 
 .footer {
