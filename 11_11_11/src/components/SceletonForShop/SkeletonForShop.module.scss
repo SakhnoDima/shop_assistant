@@ -1,0 +1,78 @@
+.skeleton_block {
+  padding: 10px;
+  display: flex;
+  gap: 6px;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.skeleton_block > * {
+  padding: 10px;
+
+  border-radius: 10px;
+  background: linear-gradient(-90deg, #a1c099, #bbeeaf, #96ee82); /* Початковий градієнт */
+  background-size: 200% 200%; /* Збільшимо розмір градієнту, щоб він виходив за межі контейнера */
+  animation: gradientAnimation 2s linear infinite; /* Анімація */
+}
+
+.skeleton_content {
+
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.skeleton_img {
+  width: 452px;
+  height: 452px;
+}
+
+.skeleton_name {
+  width: 452px;
+  height: 32px;
+}
+
+.skeleton_price {
+  width: 452px;
+  height: 28px;
+}
+
+@media (max-width: 950px) {
+  .skeleton_img, .skeleton_name, .skeleton_price{
+    width: 100%;
+  }
+}
+
+@media (max-width: 830px) {
+  .skeleton_img, {
+    height: 400px;
+  }
+}
+
+@media (max-width: 730px) {
+  .skeleton_img, {
+    height: 340px;
+  }
+}
+
+@media (max-width: 450px) {
+  .skeleton_img, {
+    height: 200px;
+  }
+}
+
+@media (max-width: 320px) {
+  .skeleton_img, {
+    height: 160px;
+  }
+}

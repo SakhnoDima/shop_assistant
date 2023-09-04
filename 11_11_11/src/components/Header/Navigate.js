@@ -2,6 +2,7 @@
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import s from "./Navigate.module.scss"
+import BagQuantity from "@/components/Bag/BagQuantity";
 
 const Navigation = ({navLinks, closeBurger}) => {
     const pathname = usePathname();
@@ -15,7 +16,10 @@ const Navigation = ({navLinks, closeBurger}) => {
                 onClick={closeBurger}
                 className={` ${isActive ? 'active_menu_link' : ''}`}
             >
-                {link.label}
+                {link.label === 'MY BAG'
+                ? <>{link.label} <BagQuantity/></>
+                    : link.label
+                }
             </Link>
         })}
     </div>

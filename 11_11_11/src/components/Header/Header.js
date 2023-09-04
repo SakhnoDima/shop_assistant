@@ -1,3 +1,4 @@
+'use client'
 import Navigation from "@/components/Header/Navigate";
 import Image from "next/image";
 import Logo from "../../../public/logoStar.png";
@@ -7,17 +8,15 @@ import Link from "next/link";
 import RunningStrip from "@/components/running_strip/Running_strip";
 
 const Header = () => {
-
     const mainNavItems = [
         {label: 'SHOP', href: "/shop"},
         {label: 'BRAND', href: "/brand"},
-        {label: 'CONTACT', href: "/contact"}
+        {label: 'SUPPORT', href: "/support"}
     ]
     const navItems = [
         {label: 'MY ACCOUNT', href: "/my-account"},
         {label: 'MY BAG', href: "/my-bag"}
     ]
-
 
     return <header className={s.header}>
         <div className={s.header_menu}>
@@ -38,9 +37,9 @@ const Header = () => {
             <nav className={s.menu_link}>
                 <Navigation navLinks={navItems}/>
             </nav>
-            <Burger/>
+            <Burger mainNavItems={mainNavItems} navItems={navItems}/>
         </div>
-        <RunningStrip info={'zxc: 1000-7???'}/>
+        <RunningStrip/>
     </header>
 }
 

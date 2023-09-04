@@ -1,33 +1,40 @@
 .running_strip_container {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 1px 7px 3px 1px;
-  position: relative;
+  padding: 7px 7px 9px 1px;
   border-bottom: 1px solid black;
   max-width: 100%;
   overflow: hidden;
-  font-size: 17px;
+  font-size: 20px;
+  white-space: nowrap;
+  background-color: #bbeeaf;
 
   &:hover {
     .running_strip {
       animation-play-state: paused;
     }
-
-  }
-
-  .running_strip {
-    animation: running_strip 10s linear infinite;
-    width: 100%;
-  }
-
-  .running_strip_btn {
-    z-index: 5;
-    right: 20px;
-    top:20px;
-    font-size: 24px;
-    cursor: pointer;
   }
 }
+
+.running_strip {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  animation: running_strip 8s linear infinite;
+
+  p {
+  }
+}
+
+.running_strip_btn {
+  z-index: 5;
+  right: 20px;
+  top: 20px;
+  font-size: 27px;
+  cursor: pointer;
+}
+
 
 @keyframes running_strip {
   0% {
@@ -36,5 +43,11 @@
   100% {
     transform: translateX(-100%);
 
+  }
+}
+
+@media (max-width: 1160px) {
+  .running_strip_container {
+    padding: 1px 7px 3px 1px;
   }
 }

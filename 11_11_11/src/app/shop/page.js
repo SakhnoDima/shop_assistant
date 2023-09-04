@@ -1,16 +1,23 @@
 "use client"
-import {useCallback, useEffect} from "react";
+import {useCallback, useEffect, useState} from "react";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import FilterIcon from "@/../public/filterIcon.png"
 import Product from "@/components/Product/Product";
 import {getProducts, setFetching} from "@/store/slices/products-slice";
 import s from "./shop.module.scss";
+import Filter from "@/components/filter/Filter";
+import SkeletonForShop from "@/components/SceletonForShop/SkeletonForShop";
 
 
 const Shop = () => {
     const dispatch = useDispatch();
-    const {products, isFetching, totalCount} = useSelector(state => state.products);
+    const {products, isFetching, totalCount, isLoading} = useSelector(state => state.products);
+    const [showFilter, setShowFilter] = useState(false)
+
+    const closeFilter = () => {
+        setShowFilter(!showFilter)
+    }
 
     useEffect(() => {
         if (isFetching) {
@@ -36,7 +43,7 @@ const Shop = () => {
 
     return <div className={s.shop_page}>
         <div className={s.sort_and_filter_btn}>
-            <div className={s.filter_btn}>
+            <div className={s.filter_btn} onClick={closeFilter}>
                 <Image
                     src={FilterIcon}
                     alt='FilterIcon'
@@ -54,7 +61,11 @@ const Shop = () => {
                     <Product info={product}/>
                 </div>
             ))}
+            {isLoading ? <SkeletonForShop count={totalCount ? 5 : 10}/> : ''}
         </div>
+        {/*{showFilter && <Filter closeFilter={closeFilter} showFilter={showFilter}/>}*/}
+        <Filter closeFilter={closeFilter} showFilter={showFilter}/>
+
     </div>
 }
 

@@ -4,7 +4,10 @@ export const getProduct = createAsyncThunk(
     'product/getProduct',
     async function ({id}, {dispatch, getState}) {
         const response = await fetch(`https://nothingtosay322.pythonanywhere.com/product/${id}`)
-        return response.json();
+
+
+        const data = await response.json();
+        return data;
     }
 );
 
@@ -17,7 +20,9 @@ const initialState = {
 const soloProductSlice = createSlice({
     name: "product",
     initialState,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: {
         [getProduct.pending]: (state) => {
             state.isLoading = true;

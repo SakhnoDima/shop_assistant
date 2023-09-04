@@ -1,7 +1,7 @@
 .header_menu {
   display: flex;
   align-items: center;
-  padding: 10px 16px;
+  padding: 16px 16px;
   justify-content: space-between;
   z-index: 100;
   position: relative;
@@ -18,7 +18,7 @@
 .menu_link > * > *{
   line-height: 1;
   padding: 0.25rem;
-  font-size: 19px;
+  font-size: 20px;
 
   &:hover {
     color: #4db935;

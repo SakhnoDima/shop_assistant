@@ -2,16 +2,15 @@
 import s from "./RunningStrip.module.scss"
 import {useState} from "react";
 
-
-const RunningStrip = ({info}) => {
+const RunningStrip = () => {
     const [running, setRunning] = useState(true);
 
 
     return <>
         {running
-            ?  <div className={s.running_strip_container}>
+            ? <div className={s.running_strip_container}>
                 <div className={s.running_strip}>
-                    {info}
+                    <p>zxc: 1000-7?</p>
                 </div>
                 <div className={s.running_strip_btn} onClick={() => setRunning(false)}>
                     ×

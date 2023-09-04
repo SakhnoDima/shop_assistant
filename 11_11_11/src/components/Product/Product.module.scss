@@ -4,19 +4,44 @@
   align-items: center;
   padding: 10px;
   cursor: pointer;
+  gap: 6px;
 }
-.product_photo {
-  object-fit: cover;
-}
+
+//.product_photo {
+//  object-fit: cover;
+//}
+
 .product_name {
   text-align: center;
   margin: 0 10px;
+
+
 }
+
+@media (max-width: 430px) {
+  .product_name {
+    max-width: 120px;
+    white-space: nowrap; /* Забороняємо перенос тексту на новий рядок */
+    overflow: hidden; /* Ховаємо зайвий текст */
+    text-overflow: ellipsis
+  }
+}
+
+
+
 .product_price {
   margin: 10px 0 0 0;
   font-size: 19px;
   border-bottom: 2px solid #4db935;
 }
+
+.product_sizes {
+  display: flex;
+  padding: 10px;
+  font-size: 27px;
+
+}
+
 @media (max-width: 950px) {
   .product_photo {
     width: 100%;

@@ -3,16 +3,7 @@ import s from "./Burger.module.scss"
 import {useState} from "react";
 import Navigation from "@/components/Header/Navigate";
 
-const mainNavItems = [
-    {label: 'SHOP', href: "/shop"},
-    {label: 'BRAND', href: "/brand"},
-    {label: 'CONTACT', href: "/contact"}
-]
-const navItems = [
-    {label: 'MY ACCOUNT', href: "/my-account"},
-    {label: 'MY BAG', href: "/my-bag"}
-]
-const Burger = () => {
+const Burger = ({mainNavItems, navItems}) => {
     const [toggleMenu, setToggleMenu] = useState(false)
 
     const showBurger = () => {

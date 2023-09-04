@@ -1,19 +1,33 @@
 import s from "@/app/shop/[id]/id.module.scss";
 import Link from "next/link";
-import Image from "next/image";
+import {OutputDescription, Size} from "@/components/ProductPage/ProductPageComponent";
+import {useDispatch, useSelector} from "react-redux";
+import {useState} from "react";
+import {addProductInBag} from "@/store/slices/bagProducts-slice";
 
-const sizes = [
-    {size: 'XS', inStock: true},
-    {size: 'S', inStock: false},
-    {size: 'M', inStock: true},
-    {size: 'L', inStock: false},
-    {size: 'XL', inStock: false},
-]
 export const ProductInformation = ({product}) => {
+    const dispatch = useDispatch()
+    const [sizeAddToBag, setSizeAddToBag] = useState('size')
+
+    const addToBag = {
+        id: product.id,
+        sizeName: sizeAddToBag,
+        count: 1,
+    }
+
+
+    const addProductToBag = () => {
+        let bagItems = JSON.parse(localStorage.getItem('bag')) || [];
+
+        bagItems.push(addToBag)
+        localStorage.setItem('bag', JSON.stringify(bagItems));
+        dispatch(addProductInBag(addToBag))
+    }
+
     return <div className={s.product_information}>
-        <div className={s.product_name}>
+        <h1 className={s.product_name}>
             {product.name}
-        </div>
+        </h1>
         <div className={s.product_price}>
             {product.price} ₴
         </div>
@@ -22,13 +36,18 @@ export const ProductInformation = ({product}) => {
         </div>
         <div className={s.choose_size_block}>
             <div className={s.list_sizes}>
-                {sizes.map((size, index) => (
-                    <Size size={size} key={index}/>
+                {product.sizes?.map((size, index) => (
+                    <Size size={size} key={index} setSizeAddToBag={setSizeAddToBag}/>
                 ))}
             </div>
-            <div className={s.add_to_card_btn}>
-                ADD TO CART
+            <div className={s.add_to_card_btn}
+                 onClick={()=> { if (sizeAddToBag !== 'size') addProductToBag()} }
+            >
+                ADD TO CART [<i>{sizeAddToBag}</i>]
             </div>
+        </div>
+        <div className={s.description}>
+            DESCRIPTION
         </div>
         <div className={s.product_description}>
             <OutputDescription description={product.description}/>
@@ -38,31 +57,4 @@ export const ProductInformation = ({product}) => {
         </Link>
     </div>
 }
-export const ImgForAlbum = ({src}) => {
-    return<Image
-            src={src}
-            alt={''}
-            width={800}
-            height={800}
-            className={s.image_size}
-        />
 
-}
-const Size = ({size}) => {
-    return <>
-        {size.inStock
-            ? <div className={s.size}> {size.size}</div>
-            : <div className={s.not_size}>{size.size}</div>
-        }
-    </>
-}
-const OutputDescription = ({description}) => {
-    const arrDescription = description?.split('\\');
-    return <>
-        {arrDescription?.map((des, index) => (
-            <div key={index} className={s.piece}>
-                <span>\</span> {des} <span className={s.slash}>\</span>
-            </div>
-        ))}
-    </>
-}

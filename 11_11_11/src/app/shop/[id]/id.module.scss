@@ -4,7 +4,7 @@
 }
 
 .photo_album {
-  flex: 0 1 55%;
+  flex: 0 1 65%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,13 +13,9 @@
   white-space: nowrap;
 }
 
-.product_information_container {
-
-}
-
 .product_information {
-  flex: 0 1 45%;
-  padding: 20px;
+  flex: 0 1 35%;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -28,18 +24,18 @@
 }
 
 .product_name {
-  font-size: 21px;
+  font-size: 23px;
 }
 
 .product_price {
-  font-size: 19px;
+  font-size: 21px;
   font-weight: bold;
   margin: 20px 0;
 }
 
 .size_guide {
   border-bottom: 1px solid black;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
 
   &:hover {
@@ -56,13 +52,13 @@
 .list_sizes {
   display: flex;
   gap: 10px;
-  margin: 5px 0;
+  margin: 15px 0;
 }
 
 .size {
   font-size: 21px;
   border: 1px solid black;
-  padding: 7px;
+  padding: 11px;
   cursor: pointer;
 
   &:hover {
@@ -74,12 +70,14 @@
   font-size: 21px;
   border: 1px solid #9b9a9a;
   color: #9b9a9a;
-  padding: 7px;
+  padding: 11px;
   position: relative;
+  cursor: not-allowed;
 }
 
 .add_to_card_btn {
-  padding: 10px;
+  width: 245px;
+  padding: 13px;
   background-color: #9b9a9a;
   color: white;
   font-size: 22px;
@@ -93,9 +91,14 @@
   }
 }
 
+.description {
+  padding: 10px 0 8px 0;
+  font-weight: bold;
+  font-size: 19px;
+}
+
 .product_description {
-  margin: 5px 0 0 0;
-  font-size: 17px;
+  font-size: 18px;
 }
 
 .piece {
@@ -135,6 +138,8 @@
     flex-direction: column;
   }
   .image_size {
+    width: 570px;
+    height: auto;
     padding: 0 2px;
   }
   .photo_album {
@@ -144,14 +149,20 @@
 }
 @media (max-width: 780px) {
   .image_size {
-    width: 600px;
+    width: 530px;
     height: auto;
+  }
+  .product_information {
+    padding: 30px;
   }
 }
 @media (max-width: 550px) {
   .image_size {
     width: 470px;
     height: auto;
+  }
+  .product_information {
+    padding: 20px;
   }
 }
 @media (max-width: 450px) {
@@ -169,4 +180,13 @@
     font-size: 19px;
     font-weight: bold;
   }
+}
+
+
+.sizeShop {
+  border-bottom: 2px solid #4db935;
+
+}
+.not_sizeShop {
+  color: #9b9a9a;
 }
