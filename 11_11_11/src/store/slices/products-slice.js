@@ -1,4 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import ChoiceCategory from "@/components/ChoiceCategory/ChoiceCategory";
+import {useDispatch} from "react-redux";
 
 export const getProducts = createAsyncThunk(
     'products/getProducts',
@@ -11,11 +13,10 @@ export const getProducts = createAsyncThunk(
                 'Content-Type': 'application/json'
             }, body: JSON.stringify({
                 sort_order: sort.sort_order,
-                // included_brands: filters.included_brands,
-                // included_categories: filters.included_categories,
-                // max_price: filters.max_price,
-                // min_price: filters.min_price,
-                // included_sizes: filters.included_sizes,
+                included_brands: filters.included_brands,
+                included_categories: filters.included_categories,
+                prices: filters.prices,
+                included_sizes: filters.included_sizes,
             })
         });
         dispatch(setFetching(false));
@@ -37,10 +38,10 @@ const initialState = {
         sort_order: "price",
     },
     filters: {
-        included_brands: ['ADIDAS', 'PUMA'],
-        included_categories: ['SNEAKERS'],
-        price: ['0-999', '1000-2499'],
-        included_sizes: ['40', '41'],
+        included_brands: [],
+        included_categories: ['SNEAKERS', 'POLOS', 'SHIRT'],
+        prices: [],
+        included_sizes: [],
     },
 
 
@@ -58,6 +59,25 @@ const productsSlice = createSlice({
         },
         setCurrentPage: (state, action) => {
             state.currentPage += 1;
+        },
+        changesInCategories : (state, action) => {
+            state.products = [];
+            state.currentPage = 1;
+        },
+        setCategory: (state, action) => {
+            state.filters.included_brands = [];
+            state.filters.prices = [];
+            state.filters.included_sizes = [];
+            if (action.payload === null) {
+                state.filters.included_categories = [];
+            } else {
+                state.filters.included_categories = [action.payload];
+            }
+        },
+        deleteFilt: (state, action) => {
+            const category = action.payload.category
+
+            state.filters[`${category}`] = state.filters[`${category}`].filter(name => name !== action.payload.name);
         }
     },
     extraReducers: {
@@ -75,5 +95,12 @@ const productsSlice = createSlice({
     }
 })
 
-export const {setProducts, setFetching, setCurrentPage} = productsSlice.actions;
+export const {
+    setProducts,
+    setFetching,
+    setCurrentPage,
+    changesInCategories,
+    setCategory,
+    deleteFilt,
+} = productsSlice.actions;
 export default productsSlice.reducer;

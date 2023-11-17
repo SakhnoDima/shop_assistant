@@ -8,6 +8,7 @@ import {getProducts, setFetching} from "@/store/slices/products-slice";
 import s from "./shop.module.scss";
 import Filter from "@/components/filter/Filter";
 import SkeletonForShop from "@/components/SceletonForShop/SkeletonForShop";
+import ChoiceCategory from "@/components/ChoiceCategory/ChoiceCategory";
 
 
 const Shop = () => {
@@ -55,6 +56,7 @@ const Shop = () => {
                 SORT
             </div>
         </div>
+        <ChoiceCategory/>
         <div className={s.products}>
             {products.map(product => (
                 <div key={product.id}>

@@ -42,3 +42,32 @@
     text-decoration: underline;
   }
 }
+
+.use_filters_title {
+  padding: 14px;
+}
+
+.allFilters {
+  border: 1px solid black;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  //gap: 8px;
+}
+
+.filterGroup {
+  display: flex;
+  flex-wrap: wrap;
+}
+.filterGroup:not(:last-child) {
+}
+
+.soloFilter {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px;
+  margin: 0 10px 10px 0;
+
+}

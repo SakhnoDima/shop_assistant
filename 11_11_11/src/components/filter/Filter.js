@@ -1,31 +1,51 @@
 import s from "./Filter.module.scss";
 import {GrClose} from "react-icons/gr";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {changesInCategories, deleteFilt, getProducts, setCategory} from "@/store/slices/products-slice";
 
-const SoloFilter = ({filter}) => {
-    // console.log(filter)
+const SoloFilter = ({filter, filterName}) => {
+    const dispatch = useDispatch()
+    const deleteFilter = (filt) => {
+        dispatch(deleteFilt({category: filterName, name: filt}))
+    }
+
+    return <div className={s.filterGroup}>
+        {filter.map((filt, index) => {
+            return <div
+                key={index}
+                className={s.soloFilter}
+            >
+                <GrClose
+                    size={14}
+                    cursor={'pointer'}
+                    onClick={() => deleteFilter(filt)}
+                /> {filt}
+            </div>
+
+        })}
+    </div>
 }
 
 const AllFilters = ({filters}) => {
-    const resFilter = []
-    const itemKeys = Object.keys(filters);
-    itemKeys.map((key) => {
-        filters[key].map(filter => {
-            resFilter.push({key, filter})
-        })
-    });
-    // console.log(resFilter)
-    return <div>
-        {resFilter.map((filter, index) => <SoloFilter key={index} filter={filter}/>)}
+    const keys = Object.keys(filters);
+    return <div className={s.allFilters}>
+        {keys.map((key, index) => (
+            <SoloFilter key={index} filter={filters[key]} filterName={key}/>
+        ))}
     </div>
 }
 
 
 const Filter = ({closeFilter, showFilter}) => {
-    const {filters} = useSelector(state => state.products)
+    const {filters} = useSelector(state => state.products);
+    const dispatch = useDispatch()
+    const loadNewProducts = () => {
+
+
+    }
 
     return <div className={`${s.filter_wrapper}` + ' ' + `${showFilter ? s.open_filter_page : ''}`}
-                onClick={event => event.target.className === 'Filter_filter_wrapper__Uxg9k Filter_open_filter_page__2zzUE' && closeFilter()}>
+                onClick={event => event.target.className === 'Filter_filter_wrapper__Uxg9k Filter_open_filter_page__2zzUE' && dispatch(changesInCategories()) && dispatch(getProducts()) && closeFilter()}>
         {/*<div className={`${s.filter_page}` + ' ' + `${showFilter ? s.open_filter_page : ''}`}>*/}
         <div className={s.filter_page}>
             <div className={s.header_filter}>
