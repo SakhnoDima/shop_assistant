@@ -21,7 +21,7 @@ const popularFaqs = [
 const contactUs = [
     {title: 'Instagram', image: InstagramLogo, href: 'https://www.instagram.com/'},
     {title: 'Twitter', image: TwitterLogo, href: 'https://twitter.com/home'},
-    {title: 'Facebook', image: FacebookLogo, href: 'https://www.facebook.com/'}
+    {title: 'Facebook', image: FacebookLogo, href: 'https://www.facebook.com/'},
 ]
 
 const Questions = ({faq}) => {
