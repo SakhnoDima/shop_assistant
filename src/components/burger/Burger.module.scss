@@ -1,0 +1,32 @@
+
+.burger_btn {
+  display: none;
+  font-size: 19px;
+
+}
+
+@media (max-width: 870px) {
+  .burger_btn {
+    display: block;
+    z-index: 10001;
+  }
+}
+
+.burger_menu {
+  position: absolute;
+  background-color: white;
+  top: 0;
+  left: 0;
+width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  z-index: 10000;
+  padding: 50px 14px 0 14px;
+  nav div > * {
+    display: block;
+    padding: 10px 7px;
+    background-color: white;
+  }
+}

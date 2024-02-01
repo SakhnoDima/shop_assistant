@@ -1,0 +1,14 @@
+
+@media (max-width: 870px) {
+  .menu_link {
+    display: none;
+  }
+}
+
+.menu_link_container a {
+}
+
+.menu_link_container > *:not(:last-child) {
+  margin: 0 20px 0 0;
+}
+
