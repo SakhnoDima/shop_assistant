@@ -2,7 +2,7 @@ import s from "./Product.module.scss"
 import Image from "next/image";
 import Link from "next/link";
 import {useState} from "react";
-import {Size, SizeShop} from "@/components/ProductPage/ProductPageComponent";
+import {Size, SizeShop} from "@/components/product_page/ProductPageComponent";
 
 const Product = ({info}) => {
     const [isVisible, setVisible] = useState(true)

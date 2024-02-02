@@ -1,5 +1,5 @@
 'use client'
-import Navigation from "@/components/Header/Navigate";
+import Navigation from "@/components/header/Navigate";
 import Image from "next/image";
 import Logo from "../../../public/logoStar.png";
 import s from "./Header.module.scss"

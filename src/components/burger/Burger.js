@@ -1,7 +1,7 @@
 'use client'
 import s from "./Burger.module.scss"
 import {useState} from "react";
-import Navigation from "@/components/Header/Navigate";
+import Navigation from "@/components/header/Navigate";
 
 const Burger = ({mainNavItems, navItems}) => {
     const [toggleMenu, setToggleMenu] = useState(false)

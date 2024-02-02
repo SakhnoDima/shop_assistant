@@ -68,11 +68,11 @@ const Home = () => {
                 BEST BUY
             </Link>
 
-            <div className={s.list_brand}>
-                {list_brands_onHome.map(brand => (
-                    <HomeListBrands brand={brand}/>
-                ))}
-            </div>
+            {/*<div className={s.list_brand}>*/}
+            {/*    {list_brands_onHome.map(brand => (*/}
+            {/*        <HomeListBrands brand={brand}/>*/}
+            {/*    ))}*/}
+            {/*</div>*/}
         </div>
     </>
 }

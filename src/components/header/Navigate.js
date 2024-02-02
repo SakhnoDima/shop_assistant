@@ -2,7 +2,7 @@
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import s from "./Navigate.module.scss"
-import BagQuantity from "@/components/Bag/BagQuantity";
+import BagQuantity from "@/components/bag/BagQuantity";
 
 const Navigation = ({navLinks, closeBurger}) => {
     const pathname = usePathname();

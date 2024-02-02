@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import ChoiceCategory from "@/components/ChoiceCategory/ChoiceCategory";
+import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
 import {useDispatch} from "react-redux";
 
 export const getProducts = createAsyncThunk(

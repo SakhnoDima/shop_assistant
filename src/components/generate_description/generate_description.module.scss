@@ -1,0 +1,17 @@
+.btn_for_generate_description {
+  margin: 20px 0;
+  width: 260px;
+  padding: 10px 13px;
+  background-color: #9b9a9a;
+  color: white;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #4db935
+  }
+}
+

@@ -1,11 +1,11 @@
 'use client'
 import {useState} from "react";
 import s from "./Support.module.scss"
-import Where_is_my_Order from "@/components/Popular_Faqs/Where_is_my_ order/Where_is_my_ order";
-import How_can_I_return_an_item from "@/components/Popular_Faqs/How_can_I_return_an_item/How_can_I_return_an_item";
+import Where_is_my_Order from "@/components/popular_faqs/Where_is_my_ order/Where_is_my_ order";
+import How_can_I_return_an_item from "@/components/popular_faqs/How_can_I_return_an_item/How_can_I_return_an_item";
 import How_can_I_exchange_an_item_for_another_size
-    from "@/components/Popular_Faqs/How_can_I_exchange_an_item_for_another_size/How_can_I_exchange_an_item_for_another_size";
-import Where_is_my_refund from "@/components/Popular_Faqs/Where_is_my_refund/Where_is_my_refund";
+    from "@/components/popular_faqs/How_can_I_exchange_an_item_for_another_size/How_can_I_exchange_an_item_for_another_size";
+import Where_is_my_refund from "@/components/popular_faqs/Where_is_my_refund/Where_is_my_refund";
 import InstagramLogo from '@/../public/icons8-instagram-64.png'
 import TwitterLogo from '@/../public/icons8-твиттер-50.png'
 import FacebookLogo from '@/../public/icons8-facebook-64.png'
