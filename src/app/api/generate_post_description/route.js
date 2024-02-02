@@ -2,7 +2,7 @@ import {NextResponse} from "next/server";
 
 require('dotenv').config();
 
-const API_KEY = process.env.SECRET_KEY;
+const API_KEY = process.env.API_KEY;
 
 
 export async function POST(request, response) {
@@ -21,7 +21,7 @@ export async function POST(request, response) {
 
         //const json = await data.json();
 
-        return NextResponse.json(process.env.SECRET_KEY);
+        return NextResponse.json(process.env.API_KEY);
 
 
 }
