@@ -25,7 +25,7 @@ export const ProductInformation = ({product}) => {
         dispatch(addProductInBag(addToBag))
     }
 
-    console.log(product.description)
+    // console.log(product)
 
     return <div className={s.product_information}>
         <h1 className={s.product_name}>
@@ -49,14 +49,14 @@ export const ProductInformation = ({product}) => {
                 ADD TO CART [<i>{sizeAddToBag}</i>]
             </div>
         </div>
-        <div className={s.description}>
-            DESCRIPTION
-        </div>
-        <div className={s.product_description}>
-            <OutputDescription description={product.description}/>
-        </div>
+        {/*<div className={s.description}>*/}
+        {/*    DESCRIPTION*/}
+        {/*</div>*/}
+        {/*<div className={s.product_description}>*/}
+        {/*    <OutputDescription description={product.description}/>*/}
+        {/*</div>*/}
 
-        <GenerateDescription keyWords={product.description} img_url={product.header_image}/>
+        <GenerateDescription keyWords={product.description} img_url={product.header_image} name={product.name} category={product.category}/>
 
         <Link href={'/shop'} className={s.back_btn}>
             {'< '}BACK TO SHOP
