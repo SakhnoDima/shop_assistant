@@ -1,78 +1,43 @@
 import {NextResponse} from "next/server";
 
-require('dotenv').config();
-
-const API_KEY = process.env.API_KEY;
-
-
+const API_KEY = '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'
 export async function POST(request, response) {
-    console.log(process.env)
-        const data = await fetch('https://api.openai.com/v1/chat/completions', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": "Bearer " + API_KEY
-            },
-            body: JSON.stringify({
-                "model": "gpt-3.5-turbo",
-                "messages": [{"role": "user", "content": 'привіт'}]
-            })
+    const body = await request.json()
+
+    console.log(body.img_url[0])
+
+    const data = await fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + API_KEY
+        },
+        body: JSON.stringify({
+            "model": "gpt-4-vision-preview",
+            // "messages": [{"role": "user", "content": body.content}]
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "What’s in this image?"
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": body.img_url[0]
+                            }
+                        }
+                    ]
+                }
+            ],
+            "max_tokens": 300
         })
+    })
 
-        //const json = await data.json();
+    const json = await data.json();
 
-        return NextResponse.json(process.env.API_KEY);
-
-
+    return NextResponse.json(json);
 }
 
-// fetch('https://api.openai.com/v1/chat/completions', {
-//     method: 'POST',
-//     headers: {
-//         "Content-Type": "application/json",
-//         "Authorization": "Bearer " + API_KEY
-//     },
-//     body: JSON.stringify({
-//         "model": "gpt-4",
-//         "messages": [{"role": "user", "content": 'Кто такой Сильвестр с талоном?'}]
-//     })
-// })
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log('Full Response:', data);
-//         if (data.choices && data.choices.length > 0) {
-//             console.log( data.choices[0].message.content);
-//         } else {
-//             console.error('Error: Empty or undefined choices array');
-//         }
-//     })
-//     .catch(error => {
-//         console.error('Error:', error);
-//     });
-//
-//
-//
-// const requestData = {
-//     model: 'dall-e-3',
-//     prompt: 'white tiger',
-//     num_images: 1,
-//     size: '1024x1024',
-// };
-//
-// fetch('https://api.openai.com/v1/images/generations', {
-//     method: 'POST',
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': 'Bearer ' + API_KEY,
-//     },
-//     body: JSON.stringify(requestData),
-// })
-//     .then(response => response.json())
-//     .then(data => {
-//         console.log('Generated Images:', data);
-//     })
-//     .catch(error => {
-//         console.error('Error:', error);
-//     });
-//
-//

@@ -56,7 +56,7 @@ export const ProductInformation = ({product}) => {
             <OutputDescription description={product.description}/>
         </div>
 
-        <GenerateDescription/>
+        <GenerateDescription keyWords={product.description} img_url={product.header_image}/>
 
         <Link href={'/shop'} className={s.back_btn}>
             {'< '}BACK TO SHOP
