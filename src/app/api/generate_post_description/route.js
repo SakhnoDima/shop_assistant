@@ -1,10 +1,10 @@
 import {NextResponse} from "next/server";
 
-const API_KEY = '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'
+const API_KEY = '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'
 export async function POST(request, response) {
     const body = await request.json()
 
-    console.log(body.img_url[0])
+    // console.log(body)
 
     const data = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -21,7 +21,7 @@ export async function POST(request, response) {
                     "content": [
                         {
                             "type": "text",
-                            "text": "What’s in this image?"
+                            "text": body.text
                         },
                         {
                             "type": "image_url",
