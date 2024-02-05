@@ -1,9 +1,10 @@
 import s from "@/app/shop/[id]/id.module.scss";
 import Link from "next/link";
-import {OutputDescription, Size} from "@/components/ProductPage/ProductPageComponent";
+import {OutputDescription, Size} from "@/components/product_page/ProductPageComponent";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import {addProductInBag} from "@/store/slices/bagProducts-slice";
+import {GenerateDescription} from "@/components/generate_description/generate_description";
 
 export const ProductInformation = ({product}) => {
     const dispatch = useDispatch()
@@ -23,6 +24,8 @@ export const ProductInformation = ({product}) => {
         localStorage.setItem('bag', JSON.stringify(bagItems));
         dispatch(addProductInBag(addToBag))
     }
+
+    console.log(product.description)
 
     return <div className={s.product_information}>
         <h1 className={s.product_name}>
@@ -52,6 +55,9 @@ export const ProductInformation = ({product}) => {
         <div className={s.product_description}>
             <OutputDescription description={product.description}/>
         </div>
+
+        <GenerateDescription/>
+
         <Link href={'/shop'} className={s.back_btn}>
             {'< '}BACK TO SHOP
         </Link>

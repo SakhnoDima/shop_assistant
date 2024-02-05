@@ -3,8 +3,8 @@ import s from "./myBag.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {getBagProducts} from "@/store/slices/bagProducts-slice";
-import {ProductInBag} from "@/components/Bag/ProductInBag";
-import TotalInfo from "@/components/Bag/TotalInfo";
+import {ProductInBag} from "@/components/bag/ProductInBag";
+import TotalInfo from "@/components/bag/TotalInfo";
 
 const MyBag = () => {
     const {locIdProducts, bagProducts} = useSelector(state => state.bagProducts)

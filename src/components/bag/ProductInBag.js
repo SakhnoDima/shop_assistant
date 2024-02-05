@@ -5,7 +5,7 @@ import Link from "next/link";
 import {GrClose} from "react-icons/gr";
 import {getBagProducts, setLocIdProducts} from "@/store/slices/bagProducts-slice";
 import {Loader} from "@/components/loader/Loader";
-import {ProductCount} from "@/components/Bag/ProductCount";
+import {ProductCount} from "@/components/bag/ProductCount";
 
 export const ProductInBag = ({product}) => {
     const {locIdProducts, isLoading} = useSelector(state => state.bagProducts)

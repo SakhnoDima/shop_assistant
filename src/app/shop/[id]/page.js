@@ -4,8 +4,8 @@ import {useEffect} from "react";
 import s from "./id.module.scss"
 import {useDispatch, useSelector} from "react-redux";
 import {getProduct} from "@/store/slices/soloProduct-slice";
-import {ProductInformation} from "@/components/ProductPage/ProductPage";
-import {ImgForAlbum} from "@/components/ProductPage/ProductPageComponent";
+import {ProductInformation} from "@/components/product_page/ProductPage";
+import {ImgForAlbum} from "@/components/product_page/ProductPageComponent";
 
 const ProductPage = () => {
     const id = usePathname().split("/").pop();
