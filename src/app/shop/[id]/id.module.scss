@@ -25,6 +25,10 @@
   top: 88px;
 }
 
+.image_size {
+  object-fit: cover;
+}
+
 .product_name {
   font-size: 23px;
 }
@@ -184,10 +188,8 @@
   }
 }
 
-
 .sizeShop {
   border-bottom: 2px solid #4db935;
-
 }
 .not_sizeShop {
   color: #9b9a9a;

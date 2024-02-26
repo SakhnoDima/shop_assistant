@@ -7,15 +7,13 @@
   gap: 6px;
 }
 
-//.product_photo {
-//  object-fit: cover;
-//}
+.product_photo {
+  object-fit: cover;
+}
 
 .product_name {
   text-align: center;
   margin: 0 10px;
-
-
 }
 
 @media (max-width: 430px) {
@@ -23,11 +21,9 @@
     max-width: 120px;
     white-space: nowrap; /* Забороняємо перенос тексту на новий рядок */
     overflow: hidden; /* Ховаємо зайвий текст */
-    text-overflow: ellipsis
+    text-overflow: ellipsis;
   }
 }
-
-
 
 .product_price {
   margin: 10px 0 0 0;
@@ -39,7 +35,6 @@
   display: flex;
   padding: 10px;
   font-size: 27px;
-
 }
 
 @media (max-width: 950px) {
