@@ -85,19 +85,20 @@ const productsSlice = createSlice({
       );
     },
   },
-  extraReducers: {
-    [getNewProducts.pending]: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-    [getNewProducts.fulfilled]: (state, action) => {
-      state.isLoading = false;
-      state.products = [...action.payload];
-      state.totalCount = action.payload.total;
-    },
-    [getNewProducts.rejected]: (state, action) => {
-      state.error = action.payload;
-    },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getNewProducts.pending, (state, _) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getNewProducts.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.products = [...payload];
+        state.totalCount = payload.total;
+      })
+      .addCase(getNewProducts.rejected, (state, { payload }) => {
+        state.error = payload;
+      });
     // [getProducts.pending]: (state) => {
     //   state.isLoading = true;
     //   state.error = null;
