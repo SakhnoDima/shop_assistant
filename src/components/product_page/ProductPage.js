@@ -1,10 +1,7 @@
 import s from "@/app/shop/[id]/id.module.scss";
 import Link from "next/link";
-import {
-  OutputDescription,
-  Size,
-} from "@/components/product_page/ProductPageComponent";
-import { useDispatch, useSelector } from "react-redux";
+import { Size } from "@/components/product_page/ProductPageComponent";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { addProductInBag } from "@/store/slices/bagProducts-slice";
 import { GenerateDescription } from "@/components/generate_description/generate_description";

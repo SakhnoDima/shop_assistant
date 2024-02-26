@@ -1,7 +1,8 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
 import FilterIcon from "@/../public/filterIcon.png";
 import Product from "@/components/product/Product";
 import { getProducts, setFetching } from "@/store/slices/products-slice";
@@ -11,11 +12,12 @@ import SkeletonForShop from "@/components/sceleton_for_shop/SkeletonForShop";
 import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
 import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
 
+import { productsSelectors } from "@/store/slices/newProdThunk/selectors";
+
 const Shop = () => {
   const dispatch = useDispatch();
-  const { products, isFetching, totalCount, isLoading, error } = useSelector(
-    (state) => state.products
-  );
+
+  const { products, isFetching, totalCount, isLoading } = productsSelectors();
   const [showFilter, setShowFilter] = useState(false);
 
   //? ===

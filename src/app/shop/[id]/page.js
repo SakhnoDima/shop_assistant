@@ -1,15 +1,15 @@
 "use client";
 import { redirect, usePathname } from "next/navigation";
-import { useEffect } from "react";
 import s from "./id.module.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getProduct } from "@/store/slices/soloProduct-slice";
 import { ProductInformation } from "@/components/product_page/ProductPage";
 import { ImgForAlbum } from "@/components/product_page/ProductPageComponent";
+import { productsSelectors } from "@/store/slices/newProdThunk/selectors";
 
 const ProductPage = () => {
   const id = +usePathname().split("/").pop();
-  const { products } = useSelector((state) => state.products);
+
+  const { products } = productsSelectors();
+
   const prod = products.find((prod) => prod.id === id);
 
   if (!prod) {
@@ -17,7 +17,6 @@ const ProductPage = () => {
   }
 
   // const dispatch = useDispatch();
-
   // useEffect(() => {
   //     dispatch(getProduct({id}))
   // }, []);

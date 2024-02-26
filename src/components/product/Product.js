@@ -5,16 +5,16 @@ import { useState } from "react";
 import { Size, SizeShop } from "@/components/product_page/ProductPageComponent";
 
 const Product = ({ info }) => {
-  const [isVisible, setVisible] = useState(true);
-  const [sizeAddToBag, setSizeAddToBag] = useState("");
+  // const [isVisible, setVisible] = useState(true);
+  // const [sizeAddToBag, setSizeAddToBag] = useState("");
 
   return (
     <Link
       href={`shop/${info.id}`}
       className={s.product}
       key={info.id}
-      onMouseEnter={() => setVisible(false)}
-      onMouseLeave={() => setVisible(true)}
+      // onMouseEnter={() => setVisible(false)}
+      // onMouseLeave={() => setVisible(true)}
     >
       {/* {isVisible ? (
         <Image
