@@ -44,7 +44,7 @@ export const ProductInformation = ({ product }) => {
             if (sizeAddToBag !== "size") addProductToBag();
           }}
         >
-          ADD TO CART <spn>[{sizeAddToBag}]</spn>
+          ADD TO CART <span>[{sizeAddToBag}]</span>
         </div>
       </div>
       {/*<div className={s.description}>*/}
@@ -56,9 +56,8 @@ export const ProductInformation = ({ product }) => {
 
       <GenerateDescription
         keyWords={product.description}
-        img_url={product.header_image}
         name={product.name}
-        category={product.category}
+        category={product.categories[0].name}
       />
 
       <Link href={"/shop"} className={s.back_btn}>
