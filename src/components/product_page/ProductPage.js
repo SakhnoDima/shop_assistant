@@ -35,17 +35,22 @@ export const ProductInformation = ({ product }) => {
       <div className={s.choose_size_block}>
         <div className={s.list_sizes}>
           {productSizes.map((size, index) => (
-            <Size size={size} key={index} setSizeAddToBag={setSizeAddToBag} />
+            <Size
+              size={size}
+              key={index}
+              setSizeAddToBag={setSizeAddToBag}
+              activeSize={sizeAddToBag}
+            />
           ))}
         </div>
-        <div
+        <button
           className={s.add_to_card_btn}
           onClick={() => {
             if (sizeAddToBag !== "size") addProductToBag();
           }}
         >
-          ADD TO CART <span>[{sizeAddToBag}]</span>
-        </div>
+          ADD TO CART
+        </button>
       </div>
       {/*<div className={s.description}>*/}
       {/*    DESCRIPTION*/}

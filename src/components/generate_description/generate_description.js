@@ -44,16 +44,17 @@ export const GenerateDescription = ({ keyWords, name, category }) => {
       setDescription("Oops... Assistant is busy. Try again in a moment.");
     }
   };
+
   return (
     <>
-      <div>
+      <div className={s.description_box}>
         {isShowBtn ? (
-          <div
+          <button
             className={s.btn_for_generate_description}
             onClick={getDescription}
           >
-            generate description
-          </div>
+            Get Description
+          </button>
         ) : (
           ""
         )}

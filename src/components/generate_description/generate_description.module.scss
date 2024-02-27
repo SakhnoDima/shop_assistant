@@ -1,5 +1,9 @@
+.description_box {
+  width: 100%;
+  padding: 10px 0;
+}
 .btn_for_generate_description {
-  margin: 20px 0;
+  margin: 20px auto;
   width: 260px;
   padding: 10px 13px;
   background-color: #9b9a9a;
@@ -8,14 +12,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
   cursor: pointer;
 
   &:hover {
-    background-color: #4db935
+    background-color: #4db935;
   }
+}
+.message_input {
+  width: 100%;
+  padding: 2px 4px;
+}
+.message_input:focus {
+  border: 2px solid #4db935;
 }
 
 .description_block {
   margin-top: 15px;
 }
-
