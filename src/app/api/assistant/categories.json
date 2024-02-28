@@ -1,0 +1,11 @@
+{
+  "categories": {
+    "T-shorts": ["men t-short", "women t-short"],
+    "Shoes": ["men shoes", "women shoes"]
+  },
+  "attributes": {
+    "color": ["Black", "Green", "Red", "White", "Yellow"],
+    "Season": ["Summer", "Winter"],
+    "size": [36, 37, 38, 39, 40, 41, 42, 43, 44]
+  }
+}

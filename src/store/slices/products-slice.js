@@ -94,7 +94,6 @@ const productsSlice = createSlice({
       .addCase(getNewProducts.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.products = [...payload];
-        state.totalCount = payload.total;
       })
       .addCase(getNewProducts.rejected, (state, { payload }) => {
         state.error = payload;
