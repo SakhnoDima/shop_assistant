@@ -34,6 +34,7 @@ export async function POST(request, response) {
 
     return NextResponse.json(data.data.choices[0].message.content);
   } catch (err) {
+    console.log(err);
     return NextResponse.status(500);
   }
 }
