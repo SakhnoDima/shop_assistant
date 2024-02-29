@@ -11,7 +11,7 @@ import Filter from "@/components/filter/Filter";
 import SkeletonForShop from "@/components/sceleton_for_shop/SkeletonForShop";
 import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
 import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
-
+import { getAllCategories } from "@/store/slices/allCategories/getAllCategories";
 import { productsSelectors } from "@/store/slices/newProdThunk/selectors";
 
 const Shop = () => {
@@ -24,6 +24,7 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(getNewProducts());
+    dispatch(getAllCategories());
   }, [dispatch]);
 
   //? ===

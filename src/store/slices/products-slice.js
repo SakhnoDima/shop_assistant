@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
 import { useDispatch } from "react-redux";
 import { getNewProducts } from "./newProdThunk/thunkProd";
+import { getAllCategories } from "./allCategories/getAllCategories";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
@@ -34,6 +35,7 @@ export const getProducts = createAsyncThunk(
 
 const initialState = {
   products: [],
+  categories: [],
   isLoading: true,
   error: null,
   currentPage: 1,
@@ -94,10 +96,22 @@ const productsSlice = createSlice({
       .addCase(getNewProducts.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.products = [...payload];
-        state.totalCount = payload.total;
       })
       .addCase(getNewProducts.rejected, (state, { payload }) => {
         state.error = payload;
+        state.isLoading = false;
+      })
+      .addCase(getAllCategories.pending, (state, _) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getAllCategories.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.categories = [...payload];
+      })
+      .addCase(getAllCategories.rejected, (state, { payload }) => {
+        state.error = payload;
+        state.isLoading = false;
       });
     // [getProducts.pending]: (state) => {
     //   state.isLoading = true;

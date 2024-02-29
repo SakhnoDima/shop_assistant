@@ -13,10 +13,13 @@ export const ImgForAlbum = ({ prod }) => {
   );
 };
 
-export const Size = ({ size, setSizeAddToBag }) => {
+export const Size = ({ activeSize, size, setSizeAddToBag }) => {
   return (
     <>
-      <div className={s.size} onClick={() => setSizeAddToBag(size)}>
+      <div
+        className={activeSize === size ? `${s.size_active}` : `${s.size}`}
+        onClick={() => setSizeAddToBag(size)}
+      >
         {size}
       </div>
       {/* {size?.amountSize > 0 ? (

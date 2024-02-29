@@ -1,43 +1,40 @@
-import {NextResponse} from "next/server";
+import { NextResponse } from "next/server";
+import axios from "axios";
 
-const API_KEY = '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'
 export async function POST(request, response) {
-    const body = await request.json()
+  const reqBody = await request.json();
 
-    // console.log(body)
+  const body = JSON.stringify({
+    model: "gpt-4-vision-preview",
+    messages: [
+      {
+        role: "user",
+        content: [
+          {
+            type: "text",
+            text: reqBody.text,
+          },
+        ],
+      },
+    ],
+    max_tokens: 300,
+  });
 
-    const data = await fetch('https://api.openai.com/v1/chat/completions', {
-        method: 'POST',
+  try {
+    const data = await axios.post(
+      "https://api.openai.com/v1/chat/completions",
+      body,
+      {
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + API_KEY
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + process.env.API_KEY,
         },
-        body: JSON.stringify({
-            "model": "gpt-4-vision-preview",
-            // "messages": [{"role": "user", "content": body.content}]
-            "messages": [
-                {
-                    "role": "user",
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": body.text
-                        },
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": body.img_url[0]
-                            }
-                        }
-                    ]
-                }
-            ],
-            "max_tokens": 300
-        })
-    })
+      }
+    );
 
-    const json = await data.json();
-
-    return NextResponse.json(json);
+    return NextResponse.json(data.data.choices[0].message.content);
+  } catch (err) {
+    console.log(err);
+    return NextResponse.status(500);
+  }
 }
-
