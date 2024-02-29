@@ -1,36 +1,45 @@
 "use client";
-import { redirect, usePathname } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "next/navigation";
+
 import s from "./id.module.scss";
 import { ProductInformation } from "@/components/product_page/ProductPage";
 import { ImgForAlbum } from "@/components/product_page/ProductPageComponent";
-import { productsSelectors } from "@/store/slices/newProdThunk/selectors";
+import { getProductById } from "@/store/slices/soloProduct-slice";
+import { soloProdSelectors } from "@/store/slices/selectors";
 
 const ProductPage = () => {
-  const id = +usePathname().split("/").pop();
+  const dispatch = useDispatch();
+  const { product, isLoading } = soloProdSelectors();
 
-  const { products } = productsSelectors();
+  let { id } = useParams();
+  id = +id;
 
-  const prod = products.find((prod) => prod.id === id);
-
-  if (!prod) {
+  if (!id) {
     redirect("/shop");
   }
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //     dispatch(getProduct({id}))
-  // }, []);
+  useEffect(() => {
+    dispatch(getProductById({ id }));
+  }, []);
 
   return (
     <div className={s.product_page}>
-      <div className={s.photo_album}>
-        {prod?.images.map((prod, index) => (
-          <ImgForAlbum prod={prod} key={index} />
-        ))}
-      </div>
-      <div className={s.product_information_container}>
-        <ProductInformation product={prod} />
-      </div>
+      {isLoading ? (
+        <p>Loading....</p>
+      ) : (
+        <>
+          <div className={s.photo_album}>
+            {product?.images?.map((prod, index) => (
+              <ImgForAlbum prod={prod} key={index} />
+            ))}
+          </div>
+          <div className={s.product_information_container}>
+            <ProductInformation product={product} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

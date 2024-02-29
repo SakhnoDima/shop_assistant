@@ -9,7 +9,7 @@ import { GenerateDescription } from "@/components/generate_description/generate_
 export const ProductInformation = ({ product }) => {
   const dispatch = useDispatch();
   const [sizeAddToBag, setSizeAddToBag] = useState("size");
-  const productSizes = product.attributes.find(
+  const productSizes = product.attributes?.find(
     (item) => item.name === "Size"
   )?.options;
 
@@ -34,7 +34,7 @@ export const ProductInformation = ({ product }) => {
       <div className={s.size_guide}>SIZE GUIDE</div>
       <div className={s.choose_size_block}>
         <div className={s.list_sizes}>
-          {productSizes.map((size, index) => (
+          {productSizes?.map((size, index) => (
             <Size
               size={size}
               key={index}
@@ -62,7 +62,7 @@ export const ProductInformation = ({ product }) => {
       <GenerateDescription
         keyWords={product.description}
         name={product.name}
-        category={product.categories[0].name}
+        category={product?.categories[0]?.name}
       />
 
       <Link href={"/shop"} className={s.back_btn}>

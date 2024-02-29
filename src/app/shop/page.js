@@ -14,6 +14,8 @@ import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
 import { getAllCategories } from "@/store/slices/allCategories/getAllCategories";
 import { productsSelectors } from "@/store/slices/newProdThunk/selectors";
 
+import { assistant } from "@/app/api/assistant/assistant";
+
 const Shop = () => {
   const dispatch = useDispatch();
 
@@ -26,6 +28,8 @@ const Shop = () => {
     dispatch(getNewProducts());
     dispatch(getAllCategories());
   }, [dispatch]);
+
+  //assistant();
 
   //? ===
 

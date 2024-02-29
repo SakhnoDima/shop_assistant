@@ -1,6 +1,7 @@
 .product_page {
   display: flex;
   position: relative;
+  align-items: center;
 }
 
 .photo_album {
@@ -167,6 +168,7 @@
   .photo_album {
     flex-direction: row;
     overflow-x: auto;
+    border: none;
   }
 }
 @media (max-width: 780px) {
