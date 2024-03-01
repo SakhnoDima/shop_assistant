@@ -62,7 +62,7 @@ export const ProductInformation = ({ product }) => {
       <GenerateDescription
         keyWords={product.description}
         name={product.name}
-        category={product?.categories[0]?.name}
+        category={product?.categories[0].name}
       />
 
       <Link href={"/shop"} className={s.back_btn}>

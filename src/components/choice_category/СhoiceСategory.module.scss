@@ -20,6 +20,10 @@
 }
 
 .categorys_list > *:hover {
- text-decoration: underline;
+  color: #4db935;
   cursor: pointer;
+}
+
+.filter_choses {
+  text-decoration: underline;
 }

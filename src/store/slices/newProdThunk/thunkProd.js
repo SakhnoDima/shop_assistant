@@ -5,9 +5,9 @@ import { BASE_URL, authData } from "@/constants/constants";
 
 export const getNewProducts = createAsyncThunk(
   "products/getNewProducts",
-  async (_, { rejectWithValue }) => {
+  async (id, { rejectWithValue }) => {
     try {
-      const response = await axios.get(BASE_URL + "products", {
+      const response = await axios.get(BASE_URL + `products?category=${id}`, {
         auth: authData,
       });
 

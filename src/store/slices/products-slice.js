@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
-import { useDispatch } from "react-redux";
+//import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
+// import { useDispatch } from "react-redux";
 import { getNewProducts } from "./newProdThunk/thunkProd";
 import { getAllCategories } from "./allCategories/getAllCategories";
 
@@ -89,6 +89,7 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
       .addCase(getNewProducts.pending, (state, _) => {
         state.isLoading = true;
         state.error = null;

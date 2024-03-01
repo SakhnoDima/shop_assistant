@@ -1,22 +1,58 @@
-import s from "./СhoiceСategory.module.scss"
-import {useDispatch} from "react-redux";
-import {changesInCategories, getProducts, setCategory} from "@/store/slices/products-slice";
-const category = ['T-SHIRTS' ,'SHIRT', 'SNEAKERS', 'SHORTS', 'POLOS', 'JACKETS', "SWEATSGIRT", "KNITS", 'HATS', 'BEANIES']
+import { useDispatch } from "react-redux";
+import Image from "next/image";
+
+import { categorySelectors } from "@/store/slices/allCategories/selectors";
+import { useFiltersContext } from "@/helpers/hooks/useFiltersContext";
+import FilterIcon from "@/../public/filterIcon.png";
+
+import s from "./СhoiceСategory.module.scss";
+import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
+import { useEffect } from "react";
+
 const ChoiceCategory = () => {
-    const dispatch = useDispatch()
+  const { setFilters, filters, deleteIndex, closeFilterMenu } =
+    useFiltersContext();
+  const { categories } = categorySelectors();
+  const dispatch = useDispatch();
 
-    const ChoiceCategory = (name) => {
-        dispatch(changesInCategories());
-        dispatch(setCategory(name));
-        dispatch(getProducts());
-
+  const ChoiceCategory = (name) => {
+    const index = filters?.findIndex((el) => el === name);
+    if (index === -1) {
+      setFilters([...filters, name]);
+    } else {
+      deleteIndex(name);
     }
-    return <div className={s.categorys_list}>
-        <div onClick={()=> ChoiceCategory(null)}>SHOP ALL</div>
-        {category.map((name, index) => (
-            <div key={index} onClick={()=> ChoiceCategory(name)}>{name}</div>
-        ))}
+  };
+  useEffect(() => {
+    if (filters.length > 0) {
+      let params = [];
+      filters.forEach((element) => {
+        const newArr = categories.find((el) => el.name === element);
+        const { id } = newArr;
+        params.push(id);
+      });
+      dispatch(getNewProducts(params.join(",")));
+    }
+  }, [dispatch, filters]);
+  return (
+    <div className={s.categorys_list}>
+      <Image
+        src={FilterIcon}
+        alt="FilterIcon"
+        width={30}
+        onClick={closeFilterMenu}
+      />
+      {categories?.map(({ name, id }) => (
+        <p
+          className={`${filters?.includes(name) ? s.filter_choses : ""}`}
+          key={id}
+          onClick={() => ChoiceCategory(name)}
+        >
+          {name}
+        </p>
+      ))}
     </div>
-}
+  );
+};
 
 export default ChoiceCategory;
