@@ -31,7 +31,10 @@ const ChoiceCategory = () => {
         const { id } = newArr;
         params.push(id);
       });
+
       dispatch(getNewProducts(params.join(",")));
+    } else if (filters.length === 0) {
+      dispatch(getNewProducts(""));
     }
   }, [dispatch, filters]);
   return (
