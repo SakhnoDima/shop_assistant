@@ -1,22 +1,22 @@
 import OpenAI from "openai";
+import { getProductsByCategory } from "./[category]/route";
 
 const openai = new OpenAI({
-  apiKey: "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",
+  apiKey: "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",
   dangerouslyAllowBrowser: true,
 });
 
 export const assistant = async () => {
-  //Step 2: Create a Thread
+  // ==========  Step 2: Create a Thread
   const thread = await openai.beta.threads.create();
 
   //Step 3: Add a Message to a Thread
   const message = await openai.beta.threads.messages.create(thread.id, {
     role: "user",
-    content: "I need red t-short, do you have?",
+    content: "I want shoes do you have?",
   });
 
   //Step 4: Run the Assistant
-
   const run = await openai.beta.threads.runs.create(thread.id, {
     assistant_id: "asst_baXTnWTVmBXF1VEE1HMdU10U",
   });
@@ -32,6 +32,17 @@ export const assistant = async () => {
           `${role.charAt(0).toUpperCase() + role.slice(1)}:${content}`
         );
       });
+    } else if (runStatus.status === "requires_action") {
+      const actions = runStatus.required_action.submit_tool_outputs;
+
+      for (const action of actions["tool_calls"]) {
+        const fooName = action.function.name;
+        const arg = action.function.arguments;
+        if (fooName === "get_products") {
+          const data = await getProductsByCategory(arg);
+          console.log(data);
+        }
+      }
     } else {
       console.log("Run is not completed");
     }

@@ -27,7 +27,7 @@ const Shop = () => {
   useEffect(() => {
     dispatch(getNewProducts(""));
     dispatch(getAllCategories());
-    // assistant();
+    assistant();
   }, [dispatch]);
 
   useEffect(() => {

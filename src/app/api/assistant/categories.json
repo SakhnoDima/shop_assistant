@@ -1,7 +1,8 @@
 {
   "categories": {
     "T-shorts": 15,
-    "Shoes": 35
+    "Shoes": 35,
+    "Trousers": 42
   },
   "attributes": {
     "color": ["Black", "Green", "Red", "White", "Yellow"],
