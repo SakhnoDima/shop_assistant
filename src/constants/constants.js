@@ -6,3 +6,5 @@ export const authData = {
   username: U_NAME,
   password: U_PSS,
 };
+
+export const LOCAL_KEY = "filters";

@@ -9,7 +9,7 @@ import {
 } from "@/store/slices/products-slice";
 import { useFiltersContext } from "@/helpers/hooks/useFiltersContext";
 
-const SoloFilter = ({ filter }) => {
+const SoloFilter = ({ indx, name }) => {
   const { deleteIndex } = useFiltersContext();
 
   return (
@@ -18,9 +18,9 @@ const SoloFilter = ({ filter }) => {
         <GrClose
           size={14}
           cursor={"pointer"}
-          onClick={() => deleteIndex(filter)}
+          onClick={() => deleteIndex(indx)}
         />
-        {filter}
+        {name}
       </div>
     </div>
   );
@@ -32,14 +32,18 @@ const AllFilters = () => {
   return (
     <div className={s.allFilters}>
       {filters?.map((filter, index) => (
-        <SoloFilter key={index} filter={filter} />
+        <SoloFilter key={index} indx={filter.id} name={filter.name} />
       ))}
     </div>
   );
 };
 
 const Filter = () => {
-  const { showFilter, closeFilterMenu, setFilters } = useFiltersContext();
+  const { showFilter, closeFilterMenu, clearFilters } = useFiltersContext();
+
+  const clearHFiltersHandler = () => {
+    clearFilters();
+  };
 
   return (
     <div
@@ -51,7 +55,10 @@ const Filter = () => {
         <div className={s.header_filter}>
           <h2 className={s.header_filter_title}>FILTER</h2>
           <div className={s.clear_filter}>
-            <button onClick={() => setFilters([])} className={s.clean_all}>
+            <button
+              onClick={() => clearHFiltersHandler()}
+              className={s.clean_all}
+            >
               CLEAN ALL
             </button>
             <GrClose size={20} cursor={"pointer"} onClick={closeFilterMenu} />

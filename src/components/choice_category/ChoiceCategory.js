@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 
@@ -7,36 +8,41 @@ import FilterIcon from "@/../public/filterIcon.png";
 
 import s from "./СhoiceСategory.module.scss";
 import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
-import { useEffect } from "react";
+
+import { LOCAL_KEY } from "@/constants/constants";
 
 const ChoiceCategory = () => {
-  const { setFilters, filters, deleteIndex, closeFilterMenu } =
+  const { filters, deleteIndex, closeFilterMenu, setFiltersData, setFilters } =
     useFiltersContext();
   const { categories } = categorySelectors();
   const dispatch = useDispatch();
 
-  const ChoiceCategory = (name) => {
-    const index = filters?.findIndex((el) => el === name);
-    if (index === -1) {
-      setFilters([...filters, name]);
-    } else {
-      deleteIndex(name);
-    }
-  };
   useEffect(() => {
-    if (filters.length > 0) {
-      let params = [];
-      filters.forEach((element) => {
-        const newArr = categories.find((el) => el.name === element);
-        const { id } = newArr;
-        params.push(id);
-      });
+    const filtersFromLocal = localStorage.getItem(LOCAL_KEY);
+    setFilters(filtersFromLocal ? JSON.parse(filtersFromLocal) : []);
+  }, []);
 
-      dispatch(getNewProducts(params.join(",")));
+  useEffect(() => {
+    console.log(filters);
+    if (filters.length > 0) {
+      console.log(filters?.map((el) => el.id).join(","));
+      dispatch(getNewProducts(filters.map((el) => el.id).join(",")));
     } else if (filters.length === 0) {
+      console.log(1);
       dispatch(getNewProducts(""));
     }
   }, [dispatch, filters]);
+
+  const ChoiceCategory = (id, name) => {
+    const index = filters?.findIndex((el) => el.id === id);
+
+    if (index === -1) {
+      setFiltersData(id, name);
+    } else {
+      deleteIndex(id);
+    }
+  };
+
   return (
     <div className={s.categorys_list}>
       <Image
@@ -47,9 +53,11 @@ const ChoiceCategory = () => {
       />
       {categories?.map(({ name, id }) => (
         <p
-          className={`${filters?.includes(name) ? s.filter_choses : ""}`}
+          className={`${
+            filters?.find((el) => el.id === id) ? s.filter_choses : ""
+          }`}
           key={id}
-          onClick={() => ChoiceCategory(name)}
+          onClick={() => ChoiceCategory(id, name)}
         >
           {name}
         </p>

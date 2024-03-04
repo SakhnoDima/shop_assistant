@@ -22,12 +22,12 @@ import { assistant } from "@/app/api/assistant/assistant";
 
 const Shop = () => {
   const dispatch = useDispatch();
-  const { products, isFetching, totalCount, isLoading } = productsSelectors();
+  const { products, isFetching, totalCount, isLoading, categoryLoading } =
+    productsSelectors();
 
   useEffect(() => {
-    dispatch(getNewProducts(""));
     dispatch(getAllCategories());
-    assistant();
+    // assistant();
   }, [dispatch]);
 
   useEffect(() => {
