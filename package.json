@@ -21,6 +21,11 @@
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.1",
     "sass": "^1.63.6",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "yarn": "^1.22.21"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.24",
+    "typescript": "5.3.3"
   }
 }

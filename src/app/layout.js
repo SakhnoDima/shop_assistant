@@ -2,6 +2,7 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { ReduxProvider } from "@/store/provider";
+import Assistant from "@/components/assistant/assistant";
 
 export const metadata = {
   title: "Home",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
           <footer className={"footer"}>
             <Footer />
           </footer>
+          <Assistant/>
         </body>
       </ReduxProvider>
     </html>
