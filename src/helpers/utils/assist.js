@@ -1,5 +1,24 @@
 import OpenAI from "openai";
-import { getProductsByCategory } from "./[category]/route";
+
+export const getProductsByCategory = async (categories) => {
+  const searchCategories = JSON.parse(categories);
+  console.log(searchCategories.category);
+  try {
+    const res = await axios.get(BASE_URL + `products`, {
+      params: {
+        category: searchCategories.category,
+      },
+      auth: authData,
+    });
+    console.log(res.data);
+    return res.data;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return NextResponse.error(error.message || "Failed to fetch products", {
+      status: error.response ? error.response.status : 500,
+    });
+  }
+};
 
 const openai = new OpenAI({
   apiKey: "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",

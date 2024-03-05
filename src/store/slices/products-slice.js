@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
 // import { useDispatch } from "react-redux";
-import { getNewProducts } from "./newProdThunk/thunkProd";
-import { getAllCategories } from "./allCategories/getAllCategories";
+import { getNewProducts } from "./new_prod_thunk/thunkProd";
+import { getAllCategories } from "./all_categories/getAllCategories";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",

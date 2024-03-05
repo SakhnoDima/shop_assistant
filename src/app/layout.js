@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           <footer className={"footer"}>
             <Footer />
           </footer>
-          <Assistant/>
+          <Assistant />
         </body>
       </ReduxProvider>
     </html>

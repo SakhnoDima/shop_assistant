@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 
-import { categorySelectors } from "@/store/slices/allCategories/selectors";
+import { categorySelectors } from "@/store/slices/all_categories/selectors";
 import { useFiltersContext } from "@/helpers/hooks/useFiltersContext";
 import FilterIcon from "@/../public/filterIcon.png";
 
 import s from "./СhoiceСategory.module.scss";
-import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
+import { getNewProducts } from "@/store/slices/new_prod_thunk/thunkProd";
 
 import { LOCAL_KEY } from "@/constants/constants";
 
@@ -20,16 +20,12 @@ const ChoiceCategory = () => {
   useEffect(() => {
     const filtersFromLocal = localStorage.getItem(LOCAL_KEY);
     setFilters(filtersFromLocal ? JSON.parse(filtersFromLocal) : []);
-    console.log("filters", filters);
   }, []);
 
   useEffect(() => {
-    console.log(filters);
     if (filters.length > 0) {
-      console.log(filters?.map((el) => el.id).join(","));
       dispatch(getNewProducts(filters.map((el) => el.id).join(",")));
     } else if (filters.length === 0) {
-      console.log(1);
       dispatch(getNewProducts(""));
     }
   }, [dispatch, filters]);

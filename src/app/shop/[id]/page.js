@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "next/navigation";
+import { redirect, useParams } from "next/navigation";
 
 import s from "./id.module.scss";
 import { ProductInformation } from "@/components/product_page/ProductPage";

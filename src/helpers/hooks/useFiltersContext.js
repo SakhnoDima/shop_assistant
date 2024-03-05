@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { LOCAL_KEY } from "@/constants/constants";
-import { categorySelectors } from "@/store/slices/allCategories/selectors";
+import { categorySelectors } from "@/store/slices/all_categories/selectors";
 
 const ThemeContext = createContext();
 
