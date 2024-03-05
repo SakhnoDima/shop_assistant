@@ -13,10 +13,7 @@ import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
 import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
 import { getAllCategories } from "@/store/slices/allCategories/getAllCategories";
 import { productsSelectors } from "@/store/slices/newProdThunk/selectors";
-import {
-  ThemeProvider,
-  useFiltersContext,
-} from "@/helpers/hooks/useFiltersContext";
+import { ThemeProvider } from "@/helpers/hooks/useFiltersContext";
 
 import { assistant } from "@/app/api/assistant/assistant";
 

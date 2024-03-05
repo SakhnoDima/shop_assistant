@@ -20,6 +20,7 @@ const ChoiceCategory = () => {
   useEffect(() => {
     const filtersFromLocal = localStorage.getItem(LOCAL_KEY);
     setFilters(filtersFromLocal ? JSON.parse(filtersFromLocal) : []);
+    console.log("filters", filters);
   }, []);
 
   useEffect(() => {
