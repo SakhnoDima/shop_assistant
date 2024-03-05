@@ -8,8 +8,9 @@ import { BASE_URL, authData } from "@/constants/constants";
 import Product from "@/components/product/Product";
 import { useEffect, useState } from "react";
 
-const FilteredResultPage = async () => {
+const FilteredResultPage = () => {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
   let { id } = useParams();
   id = +id;
 
@@ -24,27 +25,36 @@ const FilteredResultPage = async () => {
           auth: authData,
         });
         setProducts([...res.data]);
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     })();
   }, []);
 
   return (
     <>
-      {products.length > 0 ? (
-        <div className={s.products}>
-          {products.map((product) => (
-            <div key={product.id}>
-              <Product info={product} />
-            </div>
-          ))}
-        </div>
+      {loading ? (
+        <p>loading...</p>
       ) : (
-        <div className={s.empty_box}>
-          <p>Don't have result</p>
-          <Link className={s.link} href="/shop">
-            Go to main
-          </Link>
-        </div>
+        <>
+          {products.length > 0 ? (
+            <div className={s.products}>
+              {products.map((product) => (
+                <div key={product.id}>
+                  <Product info={product} />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className={s.empty_box}>
+              <p>Don't have result</p>
+              <Link className={s.link} href="/shop">
+                TO MAIN
+              </Link>
+            </div>
+          )}
+        </>
       )}
     </>
   );
