@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 
@@ -19,13 +19,15 @@ const ChoiceCategory = () => {
 
   useEffect(() => {
     const filtersFromLocal = localStorage.getItem(LOCAL_KEY);
-    setFilters(filtersFromLocal ? JSON.parse(filtersFromLocal) : []);
+    filtersFromLocal
+      ? setFilters(JSON.parse(filtersFromLocal))
+      : setFilters([]);
   }, []);
 
   useEffect(() => {
-    if (filters.length > 0) {
+    if (filters?.length > 0) {
       dispatch(getNewProducts(filters.map((el) => el.id).join(",")));
-    } else if (filters.length === 0) {
+    } else if (filters?.length === 0) {
       dispatch(getNewProducts(""));
     }
   }, [dispatch, filters]);

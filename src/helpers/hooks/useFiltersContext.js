@@ -1,6 +1,6 @@
+"use client";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { LOCAL_KEY } from "@/constants/constants";
-import { categorySelectors } from "@/store/slices/all_categories/selectors";
 
 const ThemeContext = createContext();
 
@@ -8,12 +8,7 @@ export const useFiltersContext = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
   const [showFilter, setShowFilter] = useState(false);
-  const [filters, setFilters] = useState([]);
-
-  useEffect(() => {
-    const filters = localStorage.getItem(LOCAL_KEY);
-    setFilters(filters ? JSON.parse(filters) : []);
-  }, []);
+  const [filters, setFilters] = useState();
 
   const setFiltersData = (id, name) => {
     localStorage.setItem(LOCAL_KEY, JSON.stringify([...filters, { id, name }]));
