@@ -22,20 +22,20 @@ export const POST = async (request, response) => {
   });
 
   const checkStatus = async (threadId, runId) => {
-    const runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
-    if (runStatus.status === "completed") {
-      let messages = await openai.beta.threads.messages.list(thread.id);
-      const unswear = messages.data.filter((el) => el.role === "assistant");
-
-      console.log(unswear[0].content[0].text.value);
-      return unswear[0].content[0].text.value;
-    } else {
-      return new Error("Run is not completed");
+    let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
+    while (runStatus.status !== "completed") {
+      // Wait for a bit before checking the status again
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second
+      runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
     }
+    let messages = await openai.beta.threads.messages.list(threadId);
+    const answer = messages.data.filter((el) => el.role === "assistant");
+    return answer[0].content[0].text.value;
   };
-  let data = null;
 
-  data = await checkStatus(thread.id, run.id);
+  let data = await checkStatus(thread.id, run.id);
 
+  // Assuming NextResponse.json is your way to return JSON response
+  // Replace it with the correct method according to your framework
   return NextResponse.json({ resMess: data });
 };

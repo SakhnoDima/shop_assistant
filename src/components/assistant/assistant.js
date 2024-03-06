@@ -61,12 +61,11 @@ const Assistant = () => {
             },
           }
         );
-        console.log(resMess.data);
 
         //  const aiResponse = await getAIResponse(userMessage);
         setMessages((currentMessages) => [
           ...currentMessages,
-          { role: "assistant", messages },
+          { role: "assistant", message: resMess.data.resMess },
         ]);
       } catch (error) {
         setMessages((currentMessages) => [
