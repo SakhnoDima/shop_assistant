@@ -62,7 +62,7 @@ const Assistant = () => {
           }
         );
         console.log(resMess.data);
-        console.log("In assist");
+
         //  const aiResponse = await getAIResponse(userMessage);
         setMessages((currentMessages) => [
           ...currentMessages,
