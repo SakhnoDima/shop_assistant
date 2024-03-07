@@ -1,24 +1,45 @@
 import OpenAI from "openai";
 import { NextResponse } from "next/server";
 import * as fs from "fs";
-import path from "path";
+
+import { filePath, fileName } from "../get_categories/route";
+
+const twoHours = 60 * 60 * 1000;
 
 const openai = new OpenAI({
   apiKey: process.env.API_KEY,
   dangerouslyAllowBrowser: true,
 });
 
+const assistantFilesUpload = async () => {
+  const list = await openai.files.list();
+
+  const { created_at, id } = list.data.find(
+    ({ filename }) => filename === fileName
+  );
+
+  if (Date.now() - created_at * 1000 > twoHours) {
+    await openai.beta.assistants.files.del(process.env.ASSISTANT_ID, id);
+
+    const file = await openai.files.create({
+      file: fs.createReadStream(filePath),
+      purpose: "assistants",
+    });
+    const myAssistantFile = await openai.beta.assistants.files.create(
+      process.env.ASSISTANT_ID,
+      {
+        file_id: file.id,
+      }
+    );
+  }
+};
+
 export const POST = async (request, response) => {
   const { userMessage } = await request.json();
 
   //! === add file === !///
-  console.log(process.cwd());
-  // const file = await openai.files.create({
-  //   file: fs.createReadStream(__dirname + "data.json"),
-  //   purpose: "assistants",
-  // });
+  await assistantFilesUpload();
 
-  //  console.log(file);
   // ==========  Step 1: Create a Thread
   const thread = await openai.beta.threads.create();
   //Step 2: Add a Message to a Thread
