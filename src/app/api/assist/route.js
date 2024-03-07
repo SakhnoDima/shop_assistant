@@ -1,5 +1,7 @@
 import OpenAI from "openai";
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import * as fs from "fs";
+import path from "path";
 
 const openai = new OpenAI({
   apiKey: process.env.API_KEY,
@@ -9,6 +11,14 @@ const openai = new OpenAI({
 export const POST = async (request, response) => {
   const { userMessage } = await request.json();
 
+  //! === add file === !///
+  console.log(process.cwd());
+  // const file = await openai.files.create({
+  //   file: fs.createReadStream(__dirname + "data.json"),
+  //   purpose: "assistants",
+  // });
+
+  //  console.log(file);
   // ==========  Step 1: Create a Thread
   const thread = await openai.beta.threads.create();
   //Step 2: Add a Message to a Thread
