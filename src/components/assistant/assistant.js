@@ -2,8 +2,9 @@
 "use client";
 import { useState } from "react";
 import axios from "axios";
-
+import Message from "@/components/assistant/Message";
 import s from "./assistant.module.scss";
+import { ROLE } from "@/constants/constants";
 
 const Assistant = () => {
   const [messages, setMessages] = useState([]);
@@ -45,7 +46,7 @@ const Assistant = () => {
     if (userMessage) {
       setMessages((currentMessages) => [
         ...currentMessages,
-        { role: "user", message: userMessage },
+        { role: ROLE.user, message: userMessage },
       ]);
       setInputValue("");
 
@@ -65,13 +66,13 @@ const Assistant = () => {
         //  const aiResponse = await getAIResponse(userMessage);
         setMessages((currentMessages) => [
           ...currentMessages,
-          { role: "assistant", message: resMess.data.resMess },
+          { role: ROLE.assistant, message: resMess.data.resMess },
         ]);
       } catch (error) {
         setMessages((currentMessages) => [
           ...currentMessages,
           {
-            role: "assistant",
+            role: ROLE.assistant,
             message: "Sorry, I am unable to respond at the moment.",
           },
         ]);
@@ -92,14 +93,13 @@ const Assistant = () => {
       {isChatVisible && (
         <>
           <div className={s["chat-messages"]}>
-            {reversedMessages.map((msg, index) => (
-              <div key={index} className={`${s.message} ${s[msg.role]}`}>
-                {msg.message}
-              </div>
-            ))}
             {isLoading && (
               <div className={`${s.message} ${s["assistant"]}`}>Writing...</div>
             )}
+            {/* винести в окремий компонент */}
+            {reversedMessages.map((msg, index) => (
+              <Message key={index} msg={msg} />
+            ))}
           </div>
           <form className={s["chat-input"]} onSubmit={handleSubmit}>
             <input

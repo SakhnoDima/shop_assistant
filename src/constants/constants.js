@@ -8,3 +8,8 @@ export const authData = {
 };
 
 export const LOCAL_KEY = "filters";
+
+export const ROLE = {
+  user: "user",
+  assistant: "assistant",
+};

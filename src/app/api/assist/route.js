@@ -24,8 +24,8 @@ export const POST = async (request, response) => {
   const checkStatus = async (threadId, runId) => {
     let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
     while (runStatus.status !== "completed") {
-      // Wait for a bit before checking the status again
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Wait for 1 second
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
     }
     let messages = await openai.beta.threads.messages.list(threadId);
@@ -35,7 +35,5 @@ export const POST = async (request, response) => {
 
   let data = await checkStatus(thread.id, run.id);
 
-  // Assuming NextResponse.json is your way to return JSON response
-  // Replace it with the correct method according to your framework
   return NextResponse.json({ resMess: data });
 };
