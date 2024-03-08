@@ -13,3 +13,5 @@ export const ROLE = {
   user: "user",
   assistant: "assistant",
 };
+
+export const FILE_NAME = `Data ${new Date().toDateString()}.txt`;

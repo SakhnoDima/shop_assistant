@@ -1,10 +1,12 @@
 import OpenAI from "openai";
+import axios from "axios";
 import { NextResponse } from "next/server";
 import * as fs from "fs";
 
-import { filePath, fileName } from "../get_categories/route";
+import { filePath } from "../get_categories/route";
+import { FILE_NAME } from "@/constants/constants";
 
-const twoHours = 60 * 60 * 1000;
+const oneHours = 1000;
 
 const openai = new OpenAI({
   apiKey: process.env.API_KEY,
@@ -12,25 +14,55 @@ const openai = new OpenAI({
 });
 
 const assistantFilesUpload = async () => {
+  // get all files
   const list = await openai.files.list();
 
-  const { created_at, id } = list.data.find(
-    ({ filename }) => filename === fileName
+  // find file saved before
+  const fileFromAssistant = list.data.find(
+    ({ filename }) => filename === FILE_NAME
   );
 
-  if (Date.now() - created_at * 1000 > twoHours) {
-    await openai.beta.assistants.files.del(process.env.ASSISTANT_ID, id);
+  // if file not exist or file created more than one before - update
+  if (
+    !fileFromAssistant ||
+    Date.now() - fileFromAssistant.created_at * 1000 > oneHours
+  ) {
+    //if file is exist remove from storage and assistant
+    if (fileFromAssistant) {
+      await openai.files.del(fileFromAssistant.id);
+      await openai.beta.assistants.files.del(
+        process.env.ASSISTANT_ID,
+        fileFromAssistant.id
+      );
+    }
 
+    // get categories from DB and save as file
+    await axios.get("http://localhost:3000/api/get_categories");
+
+    // create file to loading
     const file = await openai.files.create({
       file: fs.createReadStream(filePath),
       purpose: "assistants",
     });
+
+    // load file to assistant
     const myAssistantFile = await openai.beta.assistants.files.create(
       process.env.ASSISTANT_ID,
       {
         file_id: file.id,
       }
     );
+
+    //if load was successful remove file
+    if (myAssistantFile) {
+      fs.unlink(filePath, (err) => {
+        if (err) {
+          console.error(err);
+        } else {
+          console.log("File is  deleted.");
+        }
+      });
+    }
   }
 };
 
