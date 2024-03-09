@@ -1,7 +1,5 @@
-
 const Brand = () => {
-
-    return <>Brand</>
-}
+  return <p>Brand</p>;
+};
 
 export default Brand;

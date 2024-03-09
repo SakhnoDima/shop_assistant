@@ -6,7 +6,7 @@ import * as fs from "fs";
 import { filePath } from "../get_categories/route";
 import { FILE_NAME } from "@/constants/constants";
 
-const oneHours = 1000;
+const oneHours = 60 * 60 * 1000;
 
 const openai = new OpenAI({
   apiKey: process.env.API_KEY,
