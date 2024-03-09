@@ -14,4 +14,4 @@ export const ROLE = {
   assistant: "assistant",
 };
 
-export const FILE_NAME = `Data ${new Date().toDateString()}.txt`;
+export const FILE_NAME = `Data from DB.txt`;

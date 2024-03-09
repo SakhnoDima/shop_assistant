@@ -13,56 +13,73 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-const assistantFilesUpload = async () => {
-  // get all files
-  const list = await openai.files.list();
+const uploadFile = async () => {
+  // get categories from DB and save as file
+  await axios.get("http://localhost:3000/api/get_categories");
 
-  // find file saved before
-  const fileFromAssistant = list.data.find(
-    ({ filename }) => filename === FILE_NAME
+  // create file to loading
+  const file = await openai.files.create({
+    file: fs.createReadStream(filePath),
+    purpose: "assistants",
+  });
+
+  // load file to assistant
+  const myAssistantFile = await openai.beta.assistants.files.create(
+    process.env.ASSISTANT_ID,
+    {
+      file_id: file.id,
+    }
   );
 
+  //if load was successful remove file
+  if (myAssistantFile) {
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log("File is  deleted.");
+      }
+    });
+  }
+};
+
+const assistantFilesUploader = async () => {
+  // get all files
+  const list = await openai.files.list();
+  // get files from assistant
+  const assFilesList = await openai.beta.assistants.files.list(
+    process.env.ASSISTANT_ID
+  );
+
+  // find file saved before
+  const filesFromGprData = list.data.find(
+    ({ filename }) => filename === FILE_NAME
+  );
+  console.log(filesFromGprData);
   // if file not exist or file created more than one before - update
+
+  if (!filesFromGprData) {
+    await uploadFile();
+    return;
+  }
+  const fileInAssistant = assFilesList.data.find(
+    ({ id }) => id === filesFromGprData.id
+  );
+
   if (
-    !fileFromAssistant ||
-    Date.now() - fileFromAssistant.created_at * 1000 > oneHours
+    !fileInAssistant ||
+    Date.now() - filesFromGprData.created_at * 1000 > oneHours
   ) {
+    console.log(1);
     //if file is exist remove from storage and assistant
-    if (fileFromAssistant) {
-      await openai.files.del(fileFromAssistant.id);
+    if (filesFromGprData) {
+      await openai.files.del(filesFromGprData.id);
       await openai.beta.assistants.files.del(
         process.env.ASSISTANT_ID,
-        fileFromAssistant.id
+        filesFromGprData.id
       );
     }
-
-    // get categories from DB and save as file
-    await axios.get("http://localhost:3000/api/get_categories");
-
-    // create file to loading
-    const file = await openai.files.create({
-      file: fs.createReadStream(filePath),
-      purpose: "assistants",
-    });
-
-    // load file to assistant
-    const myAssistantFile = await openai.beta.assistants.files.create(
-      process.env.ASSISTANT_ID,
-      {
-        file_id: file.id,
-      }
-    );
-
-    //if load was successful remove file
-    if (myAssistantFile) {
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          console.error(err);
-        } else {
-          console.log("File is  deleted.");
-        }
-      });
-    }
+    await uploadFile();
   }
 };
 
@@ -70,7 +87,7 @@ export const POST = async (request, response) => {
   const { userMessage } = await request.json();
 
   //! === add file === !///
-  await assistantFilesUpload();
+  await assistantFilesUploader();
 
   // ==========  Step 1: Create a Thread
   const thread = await openai.beta.threads.create();
