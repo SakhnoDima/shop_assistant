@@ -12,7 +12,7 @@ export const ThemeProvider = ({ children }) => {
 
   const setFiltersData = (id, name) => {
     localStorage.setItem(LOCAL_KEY, JSON.stringify([...filters, { id, name }]));
-    setFilters([...filters, { id, name }]);
+    setFilters((prevFilters) => [...prevFilters, { id, name }]);
   };
 
   const clearFilters = () => {
