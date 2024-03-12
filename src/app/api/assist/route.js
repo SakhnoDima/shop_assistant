@@ -114,18 +114,28 @@ export const POST = async (request, response) => {
 
   const checkStatus = async (threadId, runId) => {
     let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
+    const toolOutputs = [];
 
     while (runStatus.status !== "completed") {
       await new Promise((resolve) => setTimeout(resolve, 1000));
       runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
+
       if (runStatus.status === "requires_action") {
         const actions = runStatus.required_action.submit_tool_outputs;
         for (const action of actions["tool_calls"]) {
           const fooName = action.function.name;
           const arg = action.function.arguments;
-          console.log("in tools");
+
           if (arg.length === 2) {
-            return "Add your phone and email pleas.";
+            // toolOutputs.push({
+            //   tool_call_id: action.id,
+            //   output: `Add your phone and email pleas`,
+            // });
+            // await openai.beta.threads.runs.submitToolOutputs(threadId, runId, {
+            //   tool_outputs: toolOutputs,
+            // });
+
+            return "Add your phone and email pleas";
           }
 
           if (fooName === "save_user_data") {
