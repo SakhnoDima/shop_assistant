@@ -57,9 +57,11 @@ export const assistant = async () => {
       for (const action of actions["tool_calls"]) {
         const fooName = action.function.name;
         const arg = action.function.arguments;
+        console.log("function name", fooName);
+        console.log("args", arg);
+
         if (fooName === "get_products") {
           const data = await getProductsByCategory(arg);
-          console.log(data);
         }
       }
     } else {

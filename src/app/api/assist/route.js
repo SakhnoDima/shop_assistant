@@ -13,6 +13,19 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
+const saveUserData = async (userData) => {
+  const data = JSON.parse(userData);
+  const message = `You have received a client message. Please contact the customer as quickly as possible. Email: ${data.Email}, Phone: ${data.Phone}`;
+  const url = `${process.env.BASE_URL_MESSANGER}sendMessage?chat_id=${process.env.CHAT_ID}&text=${message}`;
+  try {
+    await axios.post(url);
+    return "Your message was sent successful. Our manager will contact you soon";
+  } catch (error) {
+    console.log(error);
+    return "Something went wrong try again later";
+  }
+};
+
 const uploadFile = async () => {
   // get categories from DB and save as file
   await axios.get("http://localhost:3000/api/get_categories");
@@ -55,7 +68,6 @@ const assistantFilesUploader = async () => {
   const filesFromGprData = list.data.find(
     ({ filename }) => filename === FILE_NAME
   );
-  console.log(filesFromGprData);
   // if file not exist or file created more than one before - update
 
   if (!filesFromGprData) {
@@ -86,13 +98,12 @@ const assistantFilesUploader = async () => {
 export const POST = async (request, response) => {
   const { userMessage } = await request.json();
 
-  //! === add file === !///
   await assistantFilesUploader();
 
   // ==========  Step 1: Create a Thread
   const thread = await openai.beta.threads.create();
   //Step 2: Add a Message to a Thread
-  const message = await openai.beta.threads.messages.create(thread.id, {
+  await openai.beta.threads.messages.create(thread.id, {
     role: "user",
     content: userMessage,
   });
@@ -103,11 +114,28 @@ export const POST = async (request, response) => {
 
   const checkStatus = async (threadId, runId) => {
     let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
+
     while (runStatus.status !== "completed") {
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
       runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
+      if (runStatus.status === "requires_action") {
+        const actions = runStatus.required_action.submit_tool_outputs;
+        for (const action of actions["tool_calls"]) {
+          const fooName = action.function.name;
+          const arg = action.function.arguments;
+          console.log("in tools");
+          if (arg.length === 2) {
+            return "Add your phone and email pleas.";
+          }
+
+          if (fooName === "save_user_data") {
+            const res = await saveUserData(arg);
+            return res;
+          }
+        }
+      }
     }
+
     let messages = await openai.beta.threads.messages.list(threadId);
     const answer = messages.data.filter((el) => el.role === "assistant");
     return answer[0].content[0].text.value;
