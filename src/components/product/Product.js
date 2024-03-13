@@ -10,7 +10,7 @@ const Product = ({ info }) => {
 
   return (
     <Link
-      href={`shop/${info.id}`}
+      href={`/shop/${info.id}`}
       className={s.product}
       key={info.id}
       // onMouseEnter={() => setVisible(false)}

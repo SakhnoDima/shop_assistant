@@ -1,37 +1,27 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
-import Image from "next/image";
+import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import FilterIcon from "@/../public/filterIcon.png";
 import Product from "@/components/product/Product";
 import { getProducts, setFetching } from "@/store/slices/products-slice";
 import s from "./shop.module.scss";
 import Filter from "@/components/filter/Filter";
 import SkeletonForShop from "@/components/sceleton_for_shop/SkeletonForShop";
 import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
-import { getNewProducts } from "@/store/slices/newProdThunk/thunkProd";
-import { getAllCategories } from "@/store/slices/allCategories/getAllCategories";
-import { productsSelectors } from "@/store/slices/newProdThunk/selectors";
+
+import { getAllCategories } from "@/store/slices/all_categories/getAllCategories";
+import { productsSelectors } from "@/store/slices/new_prod_thunk/selectors";
+import { ThemeProvider } from "@/helpers/hooks/useFiltersContext";
+import { assistant } from "@/helpers/utils/assist";
 
 const Shop = () => {
   const dispatch = useDispatch();
-
   const { products, isFetching, totalCount, isLoading } = productsSelectors();
-  const [showFilter, setShowFilter] = useState(false);
-
-  //? ===
 
   useEffect(() => {
-    dispatch(getNewProducts());
     dispatch(getAllCategories());
+    //assistant();
   }, [dispatch]);
-
-  //? ===
-
-  const closeFilter = () => {
-    setShowFilter(!showFilter);
-  };
 
   useEffect(() => {
     if (isFetching) {
@@ -62,26 +52,21 @@ const Shop = () => {
   }, [scrollHandle]);
 
   return (
-    <div className={s.shop_page}>
-      <div className={s.sort_and_filter_btn}>
-        <div className={s.filter_btn} onClick={closeFilter}>
-          <Image src={FilterIcon} alt="FilterIcon" width={30} />
-          FILTER:
+    <ThemeProvider>
+      <div className={s.shop_page}>
+        <ChoiceCategory />
+        <div className={s.products}>
+          {products.map((product) => (
+            <div key={product.id}>
+              <Product info={product} />
+            </div>
+          ))}
+          {isLoading ? <SkeletonForShop count={totalCount ? 5 : 10} /> : ""}
         </div>
-        <div className={s.sort_btn}>SORT</div>
+
+        <Filter />
       </div>
-      <ChoiceCategory />
-      <div className={s.products}>
-        {products.map((product) => (
-          <div key={product.id}>
-            <Product info={product} />
-          </div>
-        ))}
-        {isLoading ? <SkeletonForShop count={totalCount ? 5 : 10} /> : ""}
-      </div>
-      {/*{showFilter && <Filter closeFilter={closeFilter} showFilter={showFilter}/>}*/}
-      <Filter closeFilter={closeFilter} showFilter={showFilter} />
-    </div>
+    </ThemeProvider>
   );
 };
 

@@ -37,3 +37,20 @@
     flex: 0 1 50%;
   }
 }
+
+.empty_box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  font-size: 20px;
+}
+
+.link {
+  padding: 8px;
+}
+
+.link:hover {
+  color: #4db935;
+}

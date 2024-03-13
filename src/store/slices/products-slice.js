@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
-import { useDispatch } from "react-redux";
-import { getNewProducts } from "./newProdThunk/thunkProd";
-import { getAllCategories } from "./allCategories/getAllCategories";
+//import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
+// import { useDispatch } from "react-redux";
+import { getNewProducts } from "./new_prod_thunk/thunkProd";
+import { getAllCategories } from "./all_categories/getAllCategories";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
@@ -37,6 +37,7 @@ const initialState = {
   products: [],
   categories: [],
   isLoading: true,
+  categoryLoading: false,
   error: null,
   currentPage: 1,
   totalCount: 0,
@@ -89,6 +90,7 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+
       .addCase(getNewProducts.pending, (state, _) => {
         state.isLoading = true;
         state.error = null;
@@ -102,16 +104,16 @@ const productsSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getAllCategories.pending, (state, _) => {
-        state.isLoading = true;
+        state.categoryLoading = true;
         state.error = null;
       })
       .addCase(getAllCategories.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
+        state.categoryLoading = false;
         state.categories = [...payload];
       })
       .addCase(getAllCategories.rejected, (state, { payload }) => {
         state.error = payload;
-        state.isLoading = false;
+        state.categoryLoading = false;
       });
     // [getProducts.pending]: (state) => {
     //   state.isLoading = true;
