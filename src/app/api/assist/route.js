@@ -127,14 +127,6 @@ export const POST = async (request, response) => {
           const arg = action.function.arguments;
 
           if (arg.length === 2) {
-            // toolOutputs.push({
-            //   tool_call_id: action.id,
-            //   output: `Add your phone and email pleas`,
-            // });
-            // await openai.beta.threads.runs.submitToolOutputs(threadId, runId, {
-            //   tool_outputs: toolOutputs,
-            // });
-
             return "Add your phone and email pleas";
           }
 
