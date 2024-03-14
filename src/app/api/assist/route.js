@@ -34,6 +34,8 @@ const uploadFile = async () => {
     "https://shop-pi-five.vercel.app/api/get_categories"
   );
 
+  console.log(filePath);
+
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
   if (!fs.existsSync(path.dirname(filePath))) {
     throw new Error(`File in path ${path.dirname(filePath)} not exist`);
