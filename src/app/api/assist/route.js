@@ -29,7 +29,7 @@ const saveUserData = async (userData) => {
 const uploadFile = async () => {
   // get categories from DB and save as file
 
-  await axios.get("https://shop-11-11-11.vercel.app/api/get_categories");
+  await axios.get("https://shop-pi-five.vercel.app/api/get_categories");
 
   if (!fs.existsSync(filePath)) {
     console.log("File isn't exist");
