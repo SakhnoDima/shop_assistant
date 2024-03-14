@@ -16,6 +16,7 @@
     "dotenv": "^16.4.1",
     "encoding": "^0.1.13",
     "formidable": "^3.5.1",
+    "langchain": "^0.1.27",
     "next": "13.4.7",
     "openai": "^4.28.0",
     "react": "18.2.0",
