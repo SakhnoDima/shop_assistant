@@ -41,14 +41,14 @@ export const GET = async (req, res) => {
     attributes: attributesData,
   };
 
-  if (!fs.existsSync(path.dirname(filePath))) {
-    fs.mkdirSync(path.dirname(filePath), { recursive: true });
-  }
+  // if (!fs.existsSync(path.dirname(filePath))) {
+  //   fs.mkdirSync(path.dirname(filePath), { recursive: true });
+  // }
 
-  fs.writeFileSync(filePath, JSON.stringify(data));
+  // fs.writeFileSync(filePath, JSON.stringify(data));
 
   return NextResponse.json({
     status: 200,
-    message: "Data is successfully saved",
+    message: JSON.stringify(data),
   });
 };

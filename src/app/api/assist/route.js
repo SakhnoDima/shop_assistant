@@ -5,6 +5,7 @@ import * as fs from "fs";
 
 import { filePath } from "../get_categories/route";
 import { FILE_NAME } from "@/constants/constants";
+import path from "path";
 
 const oneHours = 60;
 
@@ -29,12 +30,13 @@ const saveUserData = async (userData) => {
 const uploadFile = async () => {
   // get categories from DB and save as file
 
-  await axios.get("https://shop-pi-five.vercel.app/api/get_categories");
+  const data = await axios.get("http://localhost:3001/api/get_categories");
 
-  if (!fs.existsSync(filePath)) {
-    console.log("File isn't exist");
-    throw new Error("File isn't exist");
+  if (!fs.existsSync(path.dirname(filePath))) {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
   }
+
+  fs.writeFileSync(filePath, data.data.message);
 
   // create file to loading
   const file = await openai.files.create({
