@@ -28,7 +28,12 @@ const saveUserData = async (userData) => {
 
 const uploadFile = async () => {
   // get categories from DB and save as file
-  await axios.get("http://localhost:3000/api/get_categories");
+
+  await axios.get("https://shop-11-11-11.vercel.app/api/get_categories");
+
+  if (!fs.existsSync(filePath)) {
+    console.log("File isn't exist");
+  }
 
   // create file to loading
   const file = await openai.files.create({
@@ -59,6 +64,7 @@ const uploadFile = async () => {
 const assistantFilesUploader = async () => {
   // get all files
   const list = await openai.files.list();
+
   // get files from assistant
   const assFilesList = await openai.beta.assistants.files.list(
     process.env.ASSISTANT_ID
@@ -68,8 +74,8 @@ const assistantFilesUploader = async () => {
   const filesFromGprData = list.data.find(
     ({ filename }) => filename === FILE_NAME
   );
-  // if file not exist or file created more than one before - update
 
+  // if file not exist or file created more than one before - update
   if (!filesFromGprData) {
     await uploadFile();
     return;
@@ -82,7 +88,6 @@ const assistantFilesUploader = async () => {
     !fileInAssistant ||
     Date.now() - filesFromGprData.created_at * 1000 > oneHours
   ) {
-    console.log(1);
     //if file is exist remove from storage and assistant
     if (filesFromGprData) {
       await openai.files.del(filesFromGprData.id);
