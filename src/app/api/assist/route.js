@@ -30,7 +30,9 @@ const saveUserData = async (userData) => {
 const uploadFile = async () => {
   // get categories from DB and save as file
 
-  const data = await axios.get("http://localhost:3001/api/get_categories");
+  const data = await axios.get(
+    "https://shop-pi-five.vercel.app/api/get_categories"
+  );
 
   if (!fs.existsSync(path.dirname(filePath))) {
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
