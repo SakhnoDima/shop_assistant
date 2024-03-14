@@ -56,15 +56,15 @@ const uploadFile = async () => {
   );
 
   //if load was successful remove file
-  if (myAssistantFile) {
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log("File is  deleted.");
-      }
-    });
-  }
+  // if (myAssistantFile) {
+  //   fs.unlink(filePath, (err) => {
+  //     if (err) {
+  //       console.error(err);
+  //     } else {
+  //       console.log("File is  deleted.");
+  //     }
+  //   });
+  // }
 };
 
 const assistantFilesUploader = async () => {
