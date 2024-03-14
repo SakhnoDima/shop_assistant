@@ -29,14 +29,14 @@ const saveUserData = async (userData) => {
 
 const uploadFile = async () => {
   // get categories from DB and save as file
-
+  console.log(filePath);
   const data = await axios.get(
     "https://shop-pi-five.vercel.app/api/get_categories"
   );
 
-  fs.mkdirSync(path.dirname(filePath), { recursive: true });
   if (!fs.existsSync(path.dirname(filePath))) {
-    throw new Error(`File in path ${path.dirname(filePath)} not exist`);
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    console.log(`File in path ${path.dirname(filePath)} was not exist`);
   }
 
   fs.writeFileSync(filePath, data.data.message);
