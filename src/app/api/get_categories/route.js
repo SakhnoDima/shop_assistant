@@ -4,7 +4,7 @@ import * as fs from "fs";
 import path from "path";
 import { FILE_NAME } from "@/constants/constants";
 
-export const filePath = path.join(process.cwd(), "data", FILE_NAME);
+export const filePath = path.join(process.cwd(), "public", "data", FILE_NAME);
 
 const authData = {
   username: process.env.U_NAME,

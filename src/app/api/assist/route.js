@@ -33,6 +33,7 @@ const uploadFile = async () => {
 
   if (!fs.existsSync(filePath)) {
     console.log("File isn't exist");
+    throw new Error("File isn't exist");
   }
 
   // create file to loading
@@ -69,7 +70,7 @@ const assistantFilesUploader = async () => {
   const assFilesList = await openai.beta.assistants.files.list(
     process.env.ASSISTANT_ID
   );
-  console.log(assFilesList);
+
   // find file saved before
   const filesFromGprData = list.data.find(
     ({ filename }) => filename === FILE_NAME
