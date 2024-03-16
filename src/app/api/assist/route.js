@@ -29,7 +29,7 @@ const saveUserData = async (userData) => {
 
 const uploadFile = async () => {
   // get categories from DB and save as file
-  console.log(filePath);
+
   const data = await axios.get(
     "https://shop-pi-five.vercel.app/api/get_categories"
   );
@@ -101,8 +101,8 @@ const assistantFilesUploader = async () => {
         process.env.ASSISTANT_ID,
         filesFromGprData.id
       );
+      await uploadFile();
     }
-    await uploadFile();
   }
 };
 
