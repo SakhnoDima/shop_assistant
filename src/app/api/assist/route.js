@@ -7,7 +7,7 @@ import { filePath } from "../get_categories/route";
 import { FILE_NAME } from "@/constants/constants";
 import path from "path";
 
-const oneHours = 60;
+const oneHours = 60 * 60 * 1000;
 
 const openai = new OpenAI({
   apiKey: process.env.API_KEY,
@@ -123,7 +123,6 @@ export const POST = async (request, response) => {
 
   const checkStatus = async (threadId, runId) => {
     let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
-    const toolOutputs = [];
 
     while (runStatus.status !== "completed") {
       await new Promise((resolve) => setTimeout(resolve, 1000));
