@@ -54,7 +54,7 @@ const Assistant = () => {
 
       try {
         const resMess = await axios.post(
-          "/api/assist",
+          `/api/assist`,
           { userMessage },
           {
             headers: {
