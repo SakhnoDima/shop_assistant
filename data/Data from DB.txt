@@ -1,1 +1,0 @@
-{"categories":[{"name":"Bags","id":59},{"name":"Jumpers","id":48},{"name":"Shoes","id":35},{"name":"Shorts","id":55},{"name":"T-shorts","id":15},{"name":"Trousers","id":42}],"attributes":[{"name":"Color","id":1},{"name":"Gender","id":4},{"name":"Season","id":3},{"name":"Size","id":2}]}

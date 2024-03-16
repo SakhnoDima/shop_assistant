@@ -1,30 +1,50 @@
-import OpenAI from "openai";
-import axios from "axios";
-import { NextResponse } from "next/server";
-import * as fs from "fs";
-import { RecursiveJsonSplitter } from "langchain";
+import { ChatOpenAI } from "@langchain/openai";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+import { CheerioWebBaseLoader } from "langchain/document_loaders/web/cheerio";
+import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
-import { filePath } from "../get_categories/route";
+const chatModel = new ChatOpenAI({
+  openAIApiKey: "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",
+});
 
 export const GET = async () => {
-  try {
-    const data = fs.readFileSync(filePath, "utf8");
-
-    console.log(JSON.parse(data));
-
-    const splitter = RecursiveJsonSplitter((max_chunk_size = 300));
-
-    const json_chunks = splitter.split_json((json_data = data));
-    console.log(json_chunks);
-
-    texts = splitter.split_text((json_data = json_data));
-    console.log(texts);
-  } catch (error) {
-    console.log(error);
-  }
-
   return NextResponse.json({
     status: 200,
     message: "Data is successfully saved",
   });
 };
+
+const outputParser = new StringOutputParser();
+
+const splitter = new RecursiveCharacterTextSplitter();
+
+const Brand = () => {
+  (async () => {
+    const loader = new CheerioWebBaseLoader(
+      "https://docs.smith.langchain.com/user_guide"
+    );
+    const docs = await loader.load();
+
+    console.log(docs);
+    console.log(docs[0].pageContent.length);
+    const splitDocs = await splitter.splitDocuments(docs);
+
+    console.log(splitDocs.length);
+    console.log(splitDocs[0].pageContent.length);
+
+    // const prompt = ChatPromptTemplate.fromMessages([
+    //   ["system", "Ты отвечаешь как грубиян"],
+    //   ["user", "{input}"],
+    // ]);
+
+    // const chain = prompt.pipe(chatModel).pipe(outputParser);
+
+    // const rez = await chain.invoke({
+    //   input: "Добрый день, как у Вас дела?",
+    // });
+  })();
+  return <div>brand</div>;
+};
+
+export default Brand;
