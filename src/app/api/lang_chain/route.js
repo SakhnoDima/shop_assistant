@@ -4,9 +4,9 @@ import { StringOutputParser } from "@langchain/core/output_parsers";
 import { CheerioWebBaseLoader } from "langchain/document_loaders/web/cheerio";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
 
-const chatModel = new ChatOpenAI({
-  openAIApiKey: process.env.API_KEY,
-});
+// const chatModel = new ChatOpenAI({
+//   openAIApiKey: process.env.API_KEY,
+// });
 
 export const GET = async () => {
   return NextResponse.json({
