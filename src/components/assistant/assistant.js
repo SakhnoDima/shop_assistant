@@ -54,7 +54,7 @@ const Assistant = () => {
 
       try {
         console.log(1111);
-        console.log(process.env.API_KEY);
+        console.log(process.env.API_KEY || "ne polychilos");
         const resMess = await axios.post(
           `/api/assist`,
           { userMessage },
