@@ -49,6 +49,6 @@ export const GET = async (req, res) => {
 
   return NextResponse.json({
     status: 200,
-    message: "Data is successfully saved",
+    message: data,
   });
 };

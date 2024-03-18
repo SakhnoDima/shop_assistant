@@ -3,16 +3,20 @@ import { useState } from "react";
 import axios from "axios";
 
 const Brand = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const handleClick = async () => {
     const { data } = await axios.get("/api/lang_chain");
-    setData(data.message);
+    //  setData((prevData) => [...prevData, data.message]);
     console.log(data.message);
   };
   return (
     <div>
-      <button onClick={handleClick}>Summit</button>
-      <div>{data}</div>
+      <button onClick={handleClick}>Жарт</button>
+      <ul>
+        {data.map((el, ind) => (
+          <li key={ind}>{el}</li>
+        ))}
+      </ul>
     </div>
   );
 };
