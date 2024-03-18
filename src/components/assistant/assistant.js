@@ -73,7 +73,7 @@ const Assistant = () => {
           ...currentMessages,
           {
             role: ROLE.assistant,
-            message: "Sorry, I am unable to respond at the moment.",
+            message: error.message,
           },
         ]);
       } finally {
