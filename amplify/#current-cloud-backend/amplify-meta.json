@@ -1,0 +1,120 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-amplify9072c9a8b2c24-staging-140546-authRole",
+      "UnauthRoleArn": "arn:aws:iam::767397785273:role/amplify-amplify9072c9a8b2c24-staging-140546-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::767397785273:role/amplify-amplify9072c9a8b2c24-staging-140546-authRole",
+      "Region": "eu-north-1",
+      "DeploymentBucketName": "amplify-amplify9072c9a8b2c24-staging-140546-deployment",
+      "UnauthRoleName": "amplify-amplify9072c9a8b2c24-staging-140546-unauthRole",
+      "StackName": "amplify-amplify9072c9a8b2c24-staging-140546",
+      "StackId": "arn:aws:cloudformation:eu-north-1:767397785273:stack/amplify-amplify9072c9a8b2c24-staging-140546/490de790-e39e-11ee-821c-06148adb6b6f",
+      "AmplifyAppId": "d1ec9vk8kzbx8u",
+      "APIGatewayAuthURL": "https://s3.amazonaws.com/amplify-amplify9072c9a8b2c24-staging-140546-deployment/amplify-cfn-templates/api/APIGatewayAuthStack.json"
+    }
+  },
+  "auth": {
+    "shopassistant": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_SYMBOLS",
+            "REQUIRES_UPPERCASE"
+          ]
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "CreatedSNSRole": "arn:aws:iam::767397785273:role/snse7832fee140546-staging",
+        "UserPoolId": "eu-north-1_iEQEnENwB",
+        "AppClientIDWeb": "44ekkf632tmsnauemsam245po1",
+        "AppClientID": "u1v9qpmo1j87k27hdknnt11p7",
+        "IdentityPoolId": "eu-north-1:cd88fb08-6806-44c6-bb4d-6480736e6ea5",
+        "UserPoolArn": "arn:aws:cognito-idp:eu-north-1:767397785273:userpool/eu-north-1_iEQEnENwB",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "shopassistant"
+      },
+      "lastPushTimeStamp": "2024-03-18T14:27:57.408Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify9072c9a8b2c24-staging-140546-deployment/amplify-cfn-templates/auth/shopassistant-cloudformation-template.json",
+        "logicalId": "authshopassistant"
+      }
+    }
+  },
+  "function": {
+    "n": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [],
+      "lastBuildTimeStamp": "2024-03-18T14:25:19.845Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2024-03-18T14:25:19.885Z",
+      "distZipFilename": "n-76447a717056564d6e72-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-amplify9072c9a8b2c24-staging-140546-deployment",
+        "s3Key": "amplify-builds/n-76447a717056564d6e72-build.zip"
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify9072c9a8b2c24-staging-140546-deployment/amplify-cfn-templates/function/n-cloudformation-template.json",
+        "logicalId": "functionn"
+      },
+      "lastPushTimeStamp": "2024-03-18T14:28:00.729Z",
+      "output": {
+        "LambdaExecutionRoleArn": "arn:aws:iam::767397785273:role/shopassistantLambdaRoledfd53a7b-staging",
+        "Region": "eu-north-1",
+        "Arn": "arn:aws:lambda:eu-north-1:767397785273:function:n-staging",
+        "Name": "n-staging",
+        "LambdaExecutionRole": "shopassistantLambdaRoledfd53a7b-staging"
+      },
+      "lastPushDirHash": "b2jUiHBGNyfL7Fc2JRHgpVK2VQ8="
+    }
+  },
+  "api": {
+    "apiAssist": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "n",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-amplify9072c9a8b2c24-staging-140546-deployment/amplify-cfn-templates/api/apiAssist-cloudformation-template.json",
+        "logicalId": "apiapiAssist"
+      },
+      "lastPushTimeStamp": "2024-03-18T14:28:00.729Z",
+      "output": {
+        "ApiName": "apiAssist",
+        "RootUrl": "https://vzshfge0d1.execute-api.eu-north-1.amazonaws.com/staging",
+        "ApiId": "vzshfge0d1"
+      },
+      "lastPushDirHash": "FY90SgZoun0UxrY7csMk4NUI6B8="
+    }
+  }
+}

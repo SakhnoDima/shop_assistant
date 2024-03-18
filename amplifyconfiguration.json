@@ -1,0 +1,38 @@
+{
+  "aws_project_region": "eu-north-1",
+  "aws_cognito_identity_pool_id": "eu-north-1:cd88fb08-6806-44c6-bb4d-6480736e6ea5",
+  "aws_cognito_region": "eu-north-1",
+  "aws_user_pools_id": "eu-north-1_iEQEnENwB",
+  "aws_user_pools_web_client_id": "44ekkf632tmsnauemsam245po1",
+  "oauth": {},
+  "aws_cognito_username_attributes": [
+    "EMAIL"
+  ],
+  "aws_cognito_social_providers": [],
+  "aws_cognito_signup_attributes": [
+    "EMAIL"
+  ],
+  "aws_cognito_mfa_configuration": "OFF",
+  "aws_cognito_mfa_types": [
+    "SMS"
+  ],
+  "aws_cognito_password_protection_settings": {
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": [
+      "REQUIRES_LOWERCASE",
+      "REQUIRES_NUMBERS",
+      "REQUIRES_SYMBOLS",
+      "REQUIRES_UPPERCASE"
+    ]
+  },
+  "aws_cognito_verification_mechanisms": [
+    "EMAIL"
+  ],
+  "aws_cloud_logic_custom": [
+    {
+      "name": "apiAssist",
+      "endpoint": "https://vzshfge0d1.execute-api.eu-north-1.amazonaws.com/staging",
+      "region": "eu-north-1"
+    }
+  ]
+}
