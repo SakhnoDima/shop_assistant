@@ -51,10 +51,8 @@ const Assistant = () => {
       setInputValue("");
 
       setLoading(true);
-
+      console.log(process.env.API_KEY || "Не вийшло");
       try {
-        console.log(1111);
-        console.log(process.env.API_KEY || "ne polychilos");
         const resMess = await axios.post(
           `/api/assist`,
           { userMessage },
