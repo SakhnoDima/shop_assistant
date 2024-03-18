@@ -54,7 +54,7 @@ const Assistant = () => {
 
       try {
         const resMess = await axios.post(
-          `/api/assist`,
+          `https://main.d1ec9vk8kzbx8u.amplifyapp.com/api/assist`,
           { userMessage },
           {
             headers: {
@@ -73,7 +73,7 @@ const Assistant = () => {
           ...currentMessages,
           {
             role: ROLE.assistant,
-            message: error,
+            message: "Sorry, I am unable to respond at the moment.",
           },
         ]);
       } finally {
