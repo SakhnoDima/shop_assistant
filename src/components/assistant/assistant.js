@@ -53,8 +53,10 @@ const Assistant = () => {
       setLoading(true);
 
       try {
+        console.log(1111);
+        console.log(process.env.API_KEY);
         const resMess = await axios.post(
-          `https://main.d1ec9vk8kzbx8u.amplifyapp.com/api/assist`,
+          `/api/assist`,
           { userMessage },
           {
             headers: {
