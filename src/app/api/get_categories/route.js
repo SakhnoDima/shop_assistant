@@ -49,6 +49,6 @@ export const GET = async (req, res) => {
 
   return NextResponse.json({
     status: 200,
-    message: JSON.stringify(data),
+    message: JSON.stringify(process.env.API_KEY),
   });
 };
