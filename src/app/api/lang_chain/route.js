@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { ChatOpenAI } from "@langchain/openai";
-// import { ChatPromptTemplate } from "@langchain/core/prompts";
-// import { StringOutputParser } from "@langchain/core/output_parsers";
+import { StringOutputParser } from "@langchain/core/output_parsers";
 
 import { CheerioWebBaseLoader } from "langchain/document_loaders/web/cheerio";
 import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
@@ -16,29 +15,31 @@ const chatModel = new ChatOpenAI({
   openAIApiKey: process.env.API_KEY,
 });
 
-// export async function GET(request, response) {
-// const outputParser = new StringOutputParser();
-//   const prompt = ChatPromptTemplate.fromMessages([
-//     ["system", "Ти відповідаєш Українською. Дуже грубо"],
-//     ["user", "{input}"],
-//   ]);
-
-//   const chain = prompt.pipe(chatModel).pipe(outputParser);
-
-//   const rez = await chain.invoke({
-//     input: "Розкажи жарт",
-//   });
-//   console.log(rez);
-//   return NextResponse.json({ message: rez });
-// }
-
 export async function GET(request, response) {
+  const outputParser = new StringOutputParser();
+  const prompt = ChatPromptTemplate.fromMessages([
+    ["system", "Ти завжди відповідаєш як грубіян. "],
+    ["user", "{input}"],
+  ]);
+
+  const chain = prompt.pipe(chatModel).pipe(outputParser);
+
+  const rez = await chain.invoke({
+    input: "Розкажи жарт",
+  });
+  console.log(rez);
+  return NextResponse.json({ message: rez });
+}
+
+export async function POST(request, response) {
+  const { message } = await request.json();
+  console.log(message);
   const embeddings = new OpenAIEmbeddings({
     openAIApiKey: process.env.API_KEY,
   });
 
   const loader = new CheerioWebBaseLoader(
-    "https://docs.smith.langchain.com/user_guide"
+    "http://localhost:3000/api/get_categories"
   );
 
   const docs = await loader.load();
@@ -53,7 +54,17 @@ export async function GET(request, response) {
   );
 
   const prompt =
-    ChatPromptTemplate.fromTemplate(`Answer the following question based only on the provided context:
+    ChatPromptTemplate.fromTemplate(`You are shop assistant. You help user search products.
+    All your answer is valid HTML. Return from example: 
+    <div>
+    <p>text</p>
+    <a>link</a>
+     If This products have category return to client valid html link.
+    Links should be properly formatted as <a> tag with a valid "href" attribute, like http://localhost:3000/shop/filters/id, 
+    where "id" is the category ID,
+    "text" is your text that you add,
+    "link" category name.
+     All info exist only on the provided context:
 <context>
 {context}
 </context>
@@ -72,10 +83,10 @@ Question: {input}`);
   });
 
   const result = await retrievalChain.invoke({
-    input: "what is LangSmith?",
+    input: message,
   });
 
   console.log(result.answer);
 
-  return NextResponse.json({ message: "ok" });
+  return NextResponse.json({ message: result.answer });
 }
