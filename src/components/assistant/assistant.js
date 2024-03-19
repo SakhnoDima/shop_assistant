@@ -54,7 +54,7 @@ const Assistant = () => {
       console.log(process.env.API_KEY || "Не вийшло");
       try {
         const resMess = await axios.post(
-          `/api/assist`,
+          `https://main.d1ec9vk8kzbx8u.amplifyapp.com/api/assist`,
           { userMessage },
           {
             headers: {
