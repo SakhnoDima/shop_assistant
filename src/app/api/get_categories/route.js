@@ -11,7 +11,6 @@ export const filePathNewText = path.join(
   "categories",
   CATEGORIES
 );
-
 const authData = {
   username: process.env.U_NAME,
   password: process.env.U_PSS,
@@ -42,7 +41,6 @@ export const GET = async (req, res) => {
       auth: authData,
     }
   );
-
   const data = {
     categories: categoriesFromDatabase.data.map(({ id, name }) => ({
       name,
@@ -67,6 +65,6 @@ export const GET = async (req, res) => {
 
   return NextResponse.json({
     status: 200,
-    message: data,
+    message: JSON.stringify(data),
   });
 };

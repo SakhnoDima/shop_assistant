@@ -5,6 +5,7 @@ import * as fs from "fs";
 
 import { filePath } from "../get_categories/route";
 import { FILE_NAME } from "@/constants/constants";
+import path from "path";
 
 const oneHours = 60 * 60 * 1000;
 
@@ -29,11 +30,14 @@ const saveUserData = async (userData) => {
 const uploadFile = async () => {
   // get categories from DB and save as file
 
-  await axios.get("https://shop-11-11-11.vercel.app/api/get_categories");
+  const data = await axios.get(`${process.env.PROD_URL}api/get_categories`);
 
-  if (!fs.existsSync(filePath)) {
-    console.log("File isn't exist");
+  if (!fs.existsSync(path.dirname(filePath))) {
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
+    console.log(`File in path ${path.dirname(filePath)} was not exist`);
   }
+
+  fs.writeFileSync(filePath, data.data.message);
 
   // create file to loading
   const file = await openai.files.create({
@@ -50,15 +54,15 @@ const uploadFile = async () => {
   );
 
   //if load was successful remove file
-  if (myAssistantFile) {
-    fs.unlink(filePath, (err) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log("File is  deleted.");
-      }
-    });
-  }
+  // if (myAssistantFile) {
+  //   fs.unlink(filePath, (err) => {
+  //     if (err) {
+  //       console.error(err);
+  //     } else {
+  //       console.log("File is  deleted.");
+  //     }
+  //   });
+  // }
 };
 
 const assistantFilesUploader = async () => {
@@ -95,15 +99,15 @@ const assistantFilesUploader = async () => {
         process.env.ASSISTANT_ID,
         filesFromGprData.id
       );
+      await uploadFile();
     }
-    await uploadFile();
   }
 };
 
 export const POST = async (request, response) => {
   const { userMessage } = await request.json();
 
-  await assistantFilesUploader();
+  // await assistantFilesUploader();
 
   // ==========  Step 1: Create a Thread
   const thread = await openai.beta.threads.create();
@@ -119,7 +123,6 @@ export const POST = async (request, response) => {
 
   const checkStatus = async (threadId, runId) => {
     let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
-    const toolOutputs = [];
 
     while (runStatus.status !== "completed") {
       await new Promise((resolve) => setTimeout(resolve, 1000));

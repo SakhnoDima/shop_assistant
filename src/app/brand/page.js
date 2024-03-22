@@ -32,5 +32,3 @@ const Brand = (formData) => {
     </div>
   );
 };
-
-export default Brand;
