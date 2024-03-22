@@ -13,29 +13,6 @@ const Assistant = () => {
   const [isChatVisible, setChatVisible] = useState(true);
   const toggleChatVisibility = () => setChatVisible(!isChatVisible);
 
-  const getAIResponse = async (userInput) => {
-    setLoading(true);
-    try {
-      const response = await axios.post(
-        "/api/generate_post_description",
-        {
-          text: userInput,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      setLoading(false);
-      return response.data;
-    } catch (error) {
-      setLoading(false);
-      console.error("Error fetching AI response:", error);
-      return "Sorry, I am unable to respond at the moment.";
-    }
-  };
-
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -53,22 +30,17 @@ const Assistant = () => {
       setLoading(true);
 
       try {
-        const resMess = await axios.post(
-          "/api/assist",
-          { userMessage },
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const { data } = await axios.post("/api/assist_lang_chain", {
+          message: userMessage,
+          dialog: messages,
+        });
 
-        //  const aiResponse = await getAIResponse(userMessage);
         setMessages((currentMessages) => [
           ...currentMessages,
-          { role: ROLE.assistant, message: resMess.data.resMess },
+          { role: ROLE.assistant, message: data.message },
         ]);
       } catch (error) {
+        console.log(error);
         setMessages((currentMessages) => [
           ...currentMessages,
           {
@@ -114,7 +86,7 @@ const Assistant = () => {
               type="submit"
               disabled={isLoading}
             >
-              Send
+              {isLoading ? "Sending..." : "Send"}
             </button>
           </form>
         </>

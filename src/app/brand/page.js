@@ -5,14 +5,17 @@ import axios from "axios";
 const Brand = (formData) => {
   const [pending, setPending] = useState(false);
   const [pendingJoke, setPendingJoke] = useState(false);
+
   const [message, setMessage] = useState("");
+
   const [joke, setJoke] = useState([]);
-  const [data, setData] = useState("");
+  const [dialog, setDialog] = useState([]);
+  const [dataMess, setDataMss] = useState("");
 
   const handleJoke = async () => {
     try {
       setPendingJoke(true);
-      const { data } = await axios.get("/api/lang_chain");
+      const { data } = await axios.get("/api/assist_lang_chain");
       setJoke((prevData) => [data.message, ...prevData]);
       setPendingJoke(false);
     } catch (error) {
@@ -20,41 +23,13 @@ const Brand = (formData) => {
     }
   };
 
-  const handleClick = async () => {
-    try {
-      setPending(true);
-      setMessage("");
-      const { data } = await axios.post("/api/lang_chain", { message });
-      setData(data.message);
-      setPending(false);
-    } catch (error) {}
-  };
-
   return (
-    <>
-      <div>
-        <input
-          value={message}
-          type="text"
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button type="submit" disabled={pending} onClick={handleClick}>
-          {pending ? "Submitting..." : "Submit"}
-        </button>
-
-        <div dangerouslySetInnerHTML={{ __html: data }}></div>
-      </div>
-      <div>
-        <button type="button" onClick={handleJoke}>
-          {pendingJoke ? "Loading..." : "Tell me joke"}
-        </button>
-        <ul>
-          {joke.map((el, ind) => (
-            <li key={ind}>{el}</li>
-          ))}
-        </ul>
-      </div>
-    </>
+    <div>
+      <button disabled={pendingJoke} type="button" onClick={handleJoke}>
+        {pendingJoke ? "Loading..." : "Submit data"}
+      </button>
+      <div dangerouslySetInnerHTML={{ __html: joke }}></div>
+    </div>
   );
 };
 
