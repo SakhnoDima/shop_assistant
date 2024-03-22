@@ -15,6 +15,7 @@ import {
 import path from "path";
 import { retriever, combineDoc, dialogToString } from "@/helpers/utils/index";
 import { filePathNewText } from "../get_categories/route";
+import axios from "axios";
 
 const filePath = path.join(process.cwd(), "new-data", "data.txt");
 
@@ -33,6 +34,7 @@ const chatModel = new ChatOpenAI({
 //? save to stor
 export async function GET(request, response) {
   try {
+    await axios.get(`${process.env.CURRENT_URL}/api/get_categories`);
     const categoriesLoader = new TextLoader(filePathNewText);
     const categoriesDocs = await categoriesLoader.load();
 
