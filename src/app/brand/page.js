@@ -3,14 +3,8 @@ import { useState } from "react";
 import axios from "axios";
 
 const Brand = (formData) => {
-  const [pending, setPending] = useState(false);
   const [pendingJoke, setPendingJoke] = useState(false);
-
-  const [message, setMessage] = useState("");
-
   const [joke, setJoke] = useState([]);
-  const [dialog, setDialog] = useState([]);
-  const [dataMess, setDataMss] = useState("");
 
   const handleJoke = async () => {
     try {
@@ -32,3 +26,5 @@ const Brand = (formData) => {
     </div>
   );
 };
+
+export default Brand;

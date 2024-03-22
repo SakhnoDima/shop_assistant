@@ -28,13 +28,12 @@ const Assistant = () => {
       setInputValue("");
 
       setLoading(true);
-      console.log(process.env.API_KEY || "Не вийшло");
+
       try {
         const { data } = await axios.post("/api/assist_lang_chain", {
           message: userMessage,
           dialog: messages,
         });
-        ain;
 
         setMessages((currentMessages) => [
           ...currentMessages,
