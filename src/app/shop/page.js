@@ -12,7 +12,6 @@ import ChoiceCategory from "@/components/choice_category/ChoiceCategory";
 import { getAllCategories } from "@/store/slices/all_categories/getAllCategories";
 import { productsSelectors } from "@/store/slices/new_prod_thunk/selectors";
 import { ThemeProvider } from "@/helpers/hooks/useFiltersContext";
-import { assistant } from "@/helpers/utils/assist";
 
 const Shop = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,6 @@ const Shop = () => {
 
   useEffect(() => {
     dispatch(getAllCategories());
-    //assistant();
   }, [dispatch]);
 
   useEffect(() => {

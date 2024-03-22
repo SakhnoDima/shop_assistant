@@ -33,6 +33,10 @@ a {
 input {
   outline: none;
 }
+ul,
+li {
+  list-style: none;
+}
 
 .active_menu_link {
   border: 1px solid black;

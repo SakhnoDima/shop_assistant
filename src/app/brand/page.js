@@ -1,23 +1,34 @@
+"use client";
+import { useState } from "react";
 import axios from "axios";
 
-const Brand = async () => {
-  const foo = async () => {
+const Brand = (formData) => {
+  const [pending, setPending] = useState(false);
+  const [pendingJoke, setPendingJoke] = useState(false);
+
+  const [message, setMessage] = useState("");
+
+  const [joke, setJoke] = useState([]);
+  const [dialog, setDialog] = useState([]);
+  const [dataMess, setDataMss] = useState("");
+
+  const handleJoke = async () => {
     try {
-      const resMess = await axios.get(
-        `https://main.d1ec9vk8kzbx8u.amplifyapp.com/api/get_categories`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      return resMess.data.message;
+      setPendingJoke(true);
+      const { data } = await axios.get("/api/assist_lang_chain");
+      setJoke((prevData) => [data.message, ...prevData]);
+      setPendingJoke(false);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
-  const res = await foo();
-  return <div>{res}</div>;
-};
 
-export default Brand;
+  return (
+    <div>
+      <button disabled={pendingJoke} type="button" onClick={handleJoke}>
+        {pendingJoke ? "Loading..." : "Submit data"}
+      </button>
+      <div dangerouslySetInnerHTML={{ __html: joke }}></div>
+    </div>
+  );
+};

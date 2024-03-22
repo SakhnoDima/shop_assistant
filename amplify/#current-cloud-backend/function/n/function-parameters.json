@@ -1,0 +1,13 @@
+{
+  "lambdaLayers": [],
+  "environmentVariableList": [
+    {
+      "cloudFormationParameterName": "apiKey",
+      "environmentVariableName": "api_key"
+    },
+    {
+      "cloudFormationParameterName": "assistantId",
+      "environmentVariableName": "ASSISTANT_ID"
+    }
+  ]
+}

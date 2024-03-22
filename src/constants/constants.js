@@ -15,3 +15,4 @@ export const ROLE = {
 };
 
 export const FILE_NAME = `Data_from_DB.txt`;
+export const CATEGORIES = `categories.txt`;

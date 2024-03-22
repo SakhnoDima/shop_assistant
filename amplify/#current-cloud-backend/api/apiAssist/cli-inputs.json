@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "paths": {
+    "/myassist": {
+      "name": "/myassist",
+      "lambdaFunction": "n",
+      "permissions": {
+        "setting": "private",
+        "auth": [
+          "create",
+          "read",
+          "update",
+          "delete"
+        ]
+      }
+    }
+  }
+}
