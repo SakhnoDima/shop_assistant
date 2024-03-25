@@ -20,22 +20,48 @@
 
 "Які товари неможливо повернути або обміняти?
 Товари, які не підлягають поверненню, категорія: «шорти»."
-  
-"Для связи с менеджером перейдите по ссылке и оставьте свое сообщение."
 
-"Нужно ли вносить предоплату? При заказе необходимо внести предоплату в размере не менее 10% от стоимости заказа."
+"Як розмістити замовлення? 
+Розмістити замовлення легко! Огляньте наш вебсайт, додайте товари в кошик та перейдіть до оформлення замовлення. Ви введете адресу доставки та платіжну інформацію."
 
-"Какие способы оплаты? Способы оплаты: 1. Полная предоплата на банковскую карту. 2. Оплата при получении."
+"Чи можу я відстежувати своє замовлення?
+Так! Після відправки замовлення ви отримаєте номер для відстеження електронною поштою. Натисніть посилання в електронному листі, щоб відстежити його перебіг."
 
-"Какие способы доставки? Возможные способы доставки: 1. Новая Почта 2. Meest Express 3. Укрпочта."
+"Як змінити чи скасувати замовлення?
+Будь ласка, зв'яжіться з нами негайно, якщо вам потрібно змінити або скасувати замовлення. Ми зробимо все можливе, щоб внести зміни, але не можемо гарантувати цього після того, як замовлення було оброблено."
 
-"Сколько стоит доставка? Тарифы, стоимость и сроки доставки можно узнать у операторов доставки."
+"Скількі буде коштувати доставка замовлення?
+Витрати розраховуються під час оформлення замовлення залежно від вашого місцезнаходження та почтового оператора доставки."
 
-"Как быстро отправляете заказ? Заказ отправляется в течение двух рабочих дней с момента внесения заказчиком предоплаты."
+" Скільки часу триває доставка?
+Час доставки може змінюватись. Стандартна доставка зазвичай займає 5-7 робочих днів. Для швидшої доставки доступні прискорені опції."
 
-"Сколько времени на возврат заказа? Товар можно вернуть или обменять в течение 14 дней после получения в пунктах выдачи почтовых операторов."
+"Чи здійснюєте ви міжнародну доставку? 
+Так, здійснюємо міжнародну доставку! Будь ласка, зверніть увагу, що витрати на міжнародну доставку та терміни доставки можуть відрізнятися."
 
-"Какие товары нельзя вернуть или обменять? Товары, которые не подлежат возврату, категория: «шорты»."
+"Яка ваша політика повернення?
+Ми приймаємо повернення більшості товарів протягом 30 днів з моменту покупки. Товари повинні бути в новому, неношеному стані з прикріпленими етикетками."
+
+"Як розпочати повернення?
+Щоб розпочати повернення, будь ласка зв'яжіться з нашою службою підтримки."
+
+"Скільки часу займає оформлення повернення коштів?
+Відшкодування зазвичай обробляється протягом 5-7 робочих днів після того, як ми отримаємо ваше повернення. Повернення коштів буде здійснено на ваш початковий спосіб оплати."
+
+"Які способи оплати ви приймаєте? 
+ Ми приймаємо картки Visa, Mastercard, American Express, Discover і PayPal."
+
+ "Чи безпечна моя платіжна інформація?
+Так, ваша платіжна інформація захищена. Ми використовуємо галузеве стандартне шифрування для захисту ваших даних."
+
+"Що робити, якщо мій платіж не вдався?
+Будь ласка, перевірте інформацію про вашу картку та спробуйте ще раз. Якщо оплата все ще не вдається, зверніться до свого банку або спробуйте інший спосіб оплати."
+
+"Чи є у вас таблиця розмірів?
+Так, у нас є таблиця розмірів! Знайдіть її тут [посилання на таблицю розмірів](https://shop-pi-five.vercel.app/support)."
+
+"Як визначити, який розмір замовити?
+Щоб обрати розмір, що найбільше пасує вам, порівняйте свої виміри з нашою таблицею розмірів. Якщо ви все ще не впевнені, зверніться до служби підтримки клієнтів за допомогою."
 
 To contact a manager, please follow the link and leave your message."
 
@@ -52,3 +78,31 @@ To contact a manager, please follow the link and leave your message."
 "How much time do I have to return an order? Items can be returned or exchanged within 14 days after receipt at postal operator points."
 
 "Which items cannot be returned or exchanged? Items that are not eligible for return fall into the category: 'shorts'."
+
+"How to place an order? Placing an order is easy! Simply browse our website, add items to your cart, and proceed to checkout. You'll enter your shipping address and payment information."
+
+"Can I track my order? Yes! After your order is dispatched, you'll receive a tracking number via email. Click the link in the email to track its progress."
+
+"How can I change or cancel my order? Please contact us immediately if you need to change or cancel your order. We'll do our best to make changes, but we can't guarantee this after the order has been processed."
+
+"How much will shipping cost? Costs are calculated at checkout depending on your location and the shipping carrier."
+
+"How long does delivery take? Delivery times may vary. Standard delivery typically takes 5-7 business days. Expedited options are available for faster delivery."
+
+"Do you offer international shipping? Yes, we do offer international shipping! Please note that international shipping costs and delivery times may vary."
+
+"What is your return policy? We accept returns on most items within 30 days of purchase. Items must be in new, unworn condition with tags attached."
+
+"How do I initiate a return? To initiate a return, please contact our customer support."
+
+"How long does it take to process a refund? Refunds are typically processed within 5-7 business days after we receive your return. The refund will be issued to your original method of payment."
+
+"What payment methods do you accept? We accept Visa, Mastercard, American Express, Discover, and PayPal."
+
+"Is my payment information secure? Yes, your payment information is secure. We use industry-standard encryption to protect your data."
+
+"What should I do if my payment fails? Please double-check your card information and try again. If payment still fails, contact your bank or try another payment method."
+
+"Do you have a size chart? Yes, we have a size chart! Find it here: link to size chart."
+
+"How do I determine what size to order? To select the size that best fits you, compare your measurements with our size chart. If you're still unsure, contact customer support for assistance."
