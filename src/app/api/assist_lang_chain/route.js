@@ -12,10 +12,12 @@ import {
   RunnablePassthrough,
 } from "@langchain/core/runnables";
 
+import axios from "axios";
 import path from "path";
+
 import { retriever, combineDoc, dialogToString } from "@/helpers/utils/index";
 import { filePathNewText } from "../get_categories/route";
-import axios from "axios";
+import { answerTemplate, standAloneQuestion } from "./templates";
 
 const filePath = path.join(process.cwd(), "new-data", "data.txt");
 
@@ -80,56 +82,27 @@ export async function POST(request, response) {
   try {
     const allMessages = dialogToString(dialog);
 
-    const standAloneQuestion = `Given some conversation history (if any) and a question, convert the question to a stand alone question. 
-    conversation history: {convHistory}
-    question:{question}
-    standalone question: `;
-
     const standAloneQuestionPrompt =
       PromptTemplate.fromTemplate(standAloneQuestion);
-
-    const answerTemplate = `You are helpful and enthusiastic shop assistant. You can help user sea rch products and answer given question about products, deliver and payment by the question and conversation history. Try to found answer in context. If the answer is not in the context, find the answer in the conversation history if possible. If you really do not know the answer ask the user about the possibility of contacting a manager. If the user agrees, request their phone number and direct this number and question to the email: sahnodima@icloud.com. Give this link:
-     ${process.env.CURRENT_URL}/support if user asking about additional information on delivery or payment or returns. Always speak as if you were chatting to a friend. 
-     All your answer is valid HTML. Return from example:
-     <div>
-     <p>text</p>
-     </div>
-    "text" is your comments.
-
-    If a user is looking for a product, try to find a category name with id. If such a category name does not exist, suggest the user to contact the manager. If the user agrees, request their phone number and direct this number and question to the email: sahnodima@icloud.com. Give this link:
-     ${process.env.CURRENT_URL}/support if user asking about additional information on delivery or payment or returns.
-     If user searching for product return from example:
-     <div>
-     <p>text</p>
-     <a>link</a> 
-     </div>
-
-     Link should be properly formatted as <a> tag with a valid "href" attribute, like ${process.env.CURRENT_URL}shop/filters/id,
-     where "id" is the id belonging to the searched product,
-     "text" is your comments,
-     "link" category name.
-
-      All info exist only on the provided context.
-     context: {context}
-     question: {question}
-     conversation history: {convHistory}
-     answer:`;
 
     const answerPrompt = PromptTemplate.fromTemplate(answerTemplate);
 
     const firstChain = standAloneQuestionPrompt
       .pipe(chatModel)
       .pipe(new StringOutputParser());
+    // .pipe((prevMess) => console.log(prevMess));
 
     const retrievalChain = RunnableSequence.from([
       (prevResult) => prevResult.standalone_question,
       retriever,
       combineDoc,
+      // (prevMess) => console.log(prevMess),
     ]);
 
     const answerChain = answerPrompt
       .pipe(chatModel)
       .pipe(new StringOutputParser());
+    //.pipe((prevMess) => console.log(prevMess));
 
     const chain = RunnableSequence.from([
       {
