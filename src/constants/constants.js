@@ -16,3 +16,6 @@ export const ROLE = {
 
 export const FILE_NAME = `Data_from_DB.txt`;
 export const CATEGORIES = `categories.txt`;
+
+export const BASE_URL_MESSANGER = `https://api.telegram.org/bot6636819893:AAFVAtKUO7C5PO9pVUWhkqmoCMf2tL0XwWg/`;
+export const CHAT_ID = -4108914815;

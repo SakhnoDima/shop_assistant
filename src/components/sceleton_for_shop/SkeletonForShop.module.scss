@@ -11,13 +11,17 @@
   padding: 10px;
 
   border-radius: 10px;
-  background: linear-gradient(-90deg, #a1c099, #bbeeaf, #96ee82); /* Початковий градієнт */
+  background: linear-gradient(
+    -90deg,
+    #a1c099,
+    #bbeeaf,
+    #96ee82
+  ); /* Початковий градієнт */
   background-size: 200% 200%; /* Збільшимо розмір градієнту, щоб він виходив за межі контейнера */
   animation: gradientAnimation 2s linear infinite; /* Анімація */
 }
 
 .skeleton_content {
-
 }
 
 @keyframes gradientAnimation {
@@ -48,31 +52,33 @@
 }
 
 @media (max-width: 950px) {
-  .skeleton_img, .skeleton_name, .skeleton_price{
+  .skeleton_img,
+  .skeleton_name,
+  .skeleton_price {
     width: 100%;
   }
 }
 
 @media (max-width: 830px) {
-  .skeleton_img, {
+  .skeleton_img {
     height: 400px;
   }
 }
 
 @media (max-width: 730px) {
-  .skeleton_img, {
+  .skeleton_img {
     height: 340px;
   }
 }
 
 @media (max-width: 450px) {
-  .skeleton_img, {
+  .skeleton_img {
     height: 200px;
   }
 }
 
 @media (max-width: 320px) {
-  .skeleton_img, {
+  .skeleton_img {
     height: 160px;
   }
 }
