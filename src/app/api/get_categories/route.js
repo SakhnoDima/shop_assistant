@@ -20,7 +20,7 @@ const toString = (data) => {
   return data
     .map(
       ({ id, name }, indx) =>
-        `Какие товары у вас есть? name: ${name}, id: ${id}${
+        `Сategory name: ${name}, id: ${id}${
           indx === data.length - 1 ? "." : ";"
         }\n`
     )

@@ -1,6 +1,6 @@
-Какие товары у вас есть? name: Bags, id: 59;
-Какие товары у вас есть? name: Jumpers, id: 48;
-Какие товары у вас есть? name: Shoes, id: 35;
-Какие товары у вас есть? name: Shorts, id: 55;
-Какие товары у вас есть? name: T-shorts, id: 15;
-Какие товары у вас есть? name: Trousers, id: 42.
+Сategory name: Bags, id: 59;
+Сategory name: Jumpers, id: 48;
+Сategory name: Shoes, id: 35;
+Сategory name: Shorts, id: 55;
+Сategory name: T-shorts, id: 15;
+Сategory name: Trousers, id: 42.
